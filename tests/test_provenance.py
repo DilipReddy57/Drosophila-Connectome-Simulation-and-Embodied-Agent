@@ -1,4 +1,4 @@
-from connectome_sim.provenance import ExperimentConfig, MetricCapture
+from drosophila_connectome.runtime.provenance import ExperimentConfig, MetricCapture
 
 
 def test_metric_capture_contains_reproducibility_timing_neural_and_behavior_fields():

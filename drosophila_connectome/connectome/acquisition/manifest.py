@@ -13,7 +13,9 @@ def build_manifest(config: dict, raw_root: Path, output: Path) -> dict:
             raise ValueError(f"raw artifact {spec['filename']} is missing its exact official source URL")
         if not path.is_file():
             raise FileNotFoundError(f"missing required raw artifact: {path}")
-        files.append({"path": str(path), "sha256": sha256_file(path), "size_bytes": path.stat().st_size,
+
+        rel_path = f"data/raw/{config['dataset_id']}/{spec['filename']}"
+        files.append({"path": rel_path, "sha256": sha256_file(path), "size_bytes": path.stat().st_size,
                       "role": spec["role"], "format": spec["format"], "source_url": spec.get("source_url"),
                       "reason": spec["reason"]})
     manifest = {key: config[key] for key in ("dataset_id", "name", "version", "sex", "coverage", "source_id", "source_url", "license")}
@@ -22,11 +24,14 @@ def build_manifest(config: dict, raw_root: Path, output: Path) -> dict:
     output.write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
     return manifest
 
-def verify_manifest(path: Path) -> list[str]:
+def verify_manifest(path: Path, override_raw_root: Path | None = None) -> list[str]:
     manifest = json.loads(path.read_text(encoding="utf-8"))
     failures = []
     for artifact in manifest["files"]:
-        local = Path(artifact["path"])
+        if override_raw_root:
+            local = override_raw_root / Path(artifact["path"]).name
+        else:
+            local = Path(artifact["path"])
         if not local.is_file(): failures.append(f"missing: {local}")
         elif sha256_file(local) != artifact["sha256"]: failures.append(f"hash mismatch: {local}")
     return failures

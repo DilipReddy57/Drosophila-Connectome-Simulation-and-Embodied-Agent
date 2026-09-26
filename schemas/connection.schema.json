@@ -7,10 +7,7 @@
     "post_neuron_id",
     "pre_dense_index",
     "post_dense_index",
-    "synapse_count",
-    "aggregation_method",
-    "source_version",
-    "provenance"
+    "synapse_count"
   ],
   "properties": {
     "pre_dense_index": {
@@ -31,19 +28,12 @@
         "null"
       ]
     },
-    "connection_confidence": {
+    "source_nt_type": {
       "type": [
-        "number",
+        "string",
         "null"
       ],
-      "minimum": 0,
-      "maximum": 1
-    },
-    "aggregation_method": {
-      "type": "string"
-    },
-    "source_version": {
-      "type": "string"
+      "description": "Source-derived neurotransmitter annotation strictly preserved without semantic conversion to sign or conductance."
     },
     "pre_neuron_id": {
       "type": [
@@ -56,51 +46,11 @@
         "string",
         "integer"
       ]
-    },
-    "provenance": {
-      "type": "object",
-      "required": [
-        "raw_artifact",
-        "raw_sha256",
-        "normalization_version",
-        "generated_at"
-      ],
-      "properties": {
-        "raw_artifact": {
-          "type": "string"
-        },
-        "raw_sha256": {
-          "type": "string",
-          "pattern": "^[A-Fa-f0-9]{64}$"
-        },
-        "source_row": {
-          "type": [
-            "string",
-            "integer",
-            "null"
-          ]
-        },
-        "normalization_version": {
-          "type": "string"
-        },
-        "generated_at": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
     }
   },
-  "not": {
-    "required": [
-      "weight",
-      "delay",
-      "sign"
-    ]
-  }
-  "required": ["pre_dense_index", "post_dense_index", "synapse_count", "aggregation_method", "source_version"],
-  "properties": {
-    "pre_dense_index": {"type": "integer", "minimum": 0}, "post_dense_index": {"type": "integer", "minimum": 0}, "synapse_count": {"type": "integer", "minimum": 1},
-    "region": {"type": ["string", "null"]}, "connection_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1}, "aggregation_method": {"type": "string"}, "source_version": {"type": "string"}
-  },
-  "not": {"required": ["weight", "delay", "sign"]}
+  "allOf": [
+    { "not": { "required": ["weight"] } },
+    { "not": { "required": ["delay"] } },
+    { "not": { "required": ["sign"] } }
+  ]
 }

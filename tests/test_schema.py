@@ -1,6 +1,6 @@
 import pytest
 
-from connectome_sim.schema import NetworkSchema, Neuron, SchemaConnection, validate_network
+from drosophila_connectome.connectome.schema import NetworkSchema, Neuron, SchemaConnection, validate_network
 
 
 def sample_network():
