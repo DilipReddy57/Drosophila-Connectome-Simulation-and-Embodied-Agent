@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drosophila-connectome.example/schemas/neuron.schema.json",
+  "title": "Normalized neuron",
+  "description": "One canonical, normalized neuron record. This is derived data: it must retain immutable source identity and record-level provenance.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["dataset_id", "source_dataset", "source_version", "body_id", "neuron_id", "dense_index", "cell_type", "hemisphere", "neurotransmitter", "neurotransmitter_confidence", "provenance"],
+  "properties": {
+    "dataset_id": {"type": "string", "minLength": 1, "description": "Internal dataset release identifier shared by all derived records."},
+    "source_dataset": {"type": "string", "minLength": 1, "description": "Name or DOI of the immutable upstream dataset."},
+    "source_version": {"type": "string", "minLength": 1, "description": "Upstream release/version from which this record was normalized."},
+    "body_id": {"type": ["integer", "string"], "description": "Stable source-system neuron/body identifier; never replace it with dense_index."},
+    "neuron_id": {"type": "string", "minLength": 1, "description": "Canonical normalized neuron identifier, unique within dataset_id."},
+    "dense_index": {"type": "integer", "minimum": 0, "description": "Zero-based dense simulation index. Indices must be unique and contiguous from 0 through N-1 within one dataset_id/source_version."},
+    "cell_type": {"type": "string", "minLength": 1},
+    "instance": {"type": ["string", "null"]},
+    "class": {"type": ["string", "null"]},
+    "sub_class": {"type": ["string", "null"]},
+    "super_class": {"type": ["string", "null"]},
+    "hemisphere": {"type": "string", "enum": ["left", "right", "center", "bilateral", "unknown"]},
+    "neuropil": {"type": ["string", "null"]},
+    "position_nm": {"type": ["object", "null"], "additionalProperties": false, "required": ["x", "y", "z"], "properties": {"x": {"type": "number"}, "y": {"type": "number"}, "z": {"type": "number"}}},
+    "size_nm3": {"type": ["number", "null"], "minimum": 0},
+    "neurotransmitter": {"type": "string", "minLength": 1, "description": "Predicted or curated transmitter label; use 'unknown' when no label is available."},
+    "neurotransmitter_confidence": {"type": "number", "minimum": 0, "maximum": 1, "description": "Confidence in neurotransmitter assignment, normalized to [0,1]."},
+    "provenance": {"$ref": "#/$defs/provenance"}
+  },
+  "$defs": {"provenance": {"type": "object", "additionalProperties": false, "required": ["raw_artifact_id", "raw_artifact_sha256", "source_record_id", "normalization_version", "generated_at"], "properties": {"raw_artifact_id": {"type": "string", "minLength": 1}, "raw_artifact_sha256": {"type": "string", "pattern": "^[A-Fa-f0-9]{64}$"}, "source_record_id": {"type": ["string", "integer"]}, "normalization_version": {"type": "string", "minLength": 1}, "generated_at": {"type": "string", "format": "date-time"}, "transformation": {"type": "string"}}}}
+}
