@@ -1,0 +1,36 @@
+{
+  "audit_status": "NO_GO",
+  "auditor": "Agent H",
+  "findings": [
+    {
+      "category": "integrity",
+      "severity": "CRITICAL",
+      "description": "0 self-edges found, expected ~56k. Either stripped in C1 or faulty query."
+    },
+    {
+      "category": "NT accounting",
+      "severity": "CRITICAL",
+      "description": "Neurotransmitters script missing execution block and fails on schema. Report missing."
+    },
+    {
+      "category": "region accounting",
+      "severity": "CRITICAL",
+      "description": "regions.py crashes due to pre_id vs pre_neuron_id schema mismatch."
+    },
+    {
+      "category": "scientific wording",
+      "severity": "MAJOR",
+      "description": "Scope violation: Use of 'weighted' degree and references to functional/LIF models in benchmark."
+    },
+    {
+      "category": "cell-type accounting",
+      "severity": "MAJOR",
+      "description": "Reports 0 unannotated neurons due to naive null checking. Script silently falls back to mock data."
+    },
+    {
+      "category": "degree calculations",
+      "severity": "MINOR",
+      "description": "Structural degree aggregates over unique edges, deviating from raw edge counts."
+    }
+  ]
+}
