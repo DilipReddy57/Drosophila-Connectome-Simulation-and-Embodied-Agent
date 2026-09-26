@@ -1,0 +1,100 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Canonical aggregated connection record",
+  "type": "object",
+  "required": [
+    "pre_neuron_id",
+    "post_neuron_id",
+    "pre_dense_index",
+    "post_dense_index",
+    "synapse_count",
+    "aggregation_method",
+    "source_version",
+    "provenance"
+  ],
+  "properties": {
+    "pre_dense_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "post_dense_index": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "synapse_count": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "region": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "connection_confidence": {
+      "type": [
+        "number",
+        "null"
+      ],
+      "minimum": 0,
+      "maximum": 1
+    },
+    "aggregation_method": {
+      "type": "string"
+    },
+    "source_version": {
+      "type": "string"
+    },
+    "pre_neuron_id": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "post_neuron_id": {
+      "type": [
+        "string",
+        "integer"
+      ]
+    },
+    "provenance": {
+      "type": "object",
+      "required": [
+        "raw_artifact",
+        "raw_sha256",
+        "normalization_version",
+        "generated_at"
+      ],
+      "properties": {
+        "raw_artifact": {
+          "type": "string"
+        },
+        "raw_sha256": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        },
+        "source_row": {
+          "type": [
+            "string",
+            "integer",
+            "null"
+          ]
+        },
+        "normalization_version": {
+          "type": "string"
+        },
+        "generated_at": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "not": {
+    "required": [
+      "weight",
+      "delay",
+      "sign"
+    ]
+  }
+}

@@ -1,0 +1,5 @@
+pre_root_id,post_root_id,synapse_count,neuropil
+10,20,2,AL
+10,20,3,AL
+20,30,4,VNC
+30,30,1,CB
