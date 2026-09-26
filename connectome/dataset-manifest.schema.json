@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://drosophila-connectome.example/schemas/dataset-manifest.schema.json",
+  "title": "Connectome dataset manifest",
+  "description": "Release-level inventory linking immutable raw artifacts to reproducible derived outputs.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_id",
+    "manifest_version",
+    "dataset_id",
+    "source_dataset",
+    "source_version",
+    "created_at",
+    "raw_artifacts",
+    "derived_artifacts",
+    "dense_index_mapping",
+    "provenance"
+  ],
+  "properties": {
+    "manifest_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "manifest_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "dataset_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "source_dataset": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Upstream dataset name, DOI, or stable landing page."
+    },
+    "source_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "raw_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/artifact"
+      },
+      "description": "Immutable, append-only source files. A changed file requires a new artifact identifier and checksum."
+    },
+    "derived_artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/derivedArtifact"
+      },
+      "description": "Rebuildable normalized tables, aggregated tables, and mappings; each records its raw inputs and transformation."
+    },
+    "dense_index_mapping": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "neuron_count",
+        "index_base",
+        "contiguous",
+        "mapping_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "neuron_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "index_base": {
+          "const": 0
+        },
+        "contiguous": {
+          "const": true
+        },
+        "mapping_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "repository_revision",
+        "generated_by"
+      ],
+      "properties": {
+        "repository_revision": {
+          "type": "string",
+          "minLength": 1
+        },
+        "generated_by": {
+          "type": "string",
+          "minLength": 1
+        },
+        "command": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "uri",
+        "sha256",
+        "format"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uri": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "derivedArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "uri",
+        "sha256",
+        "format",
+        "kind",
+        "input_artifact_ids",
+        "transformation_version"
+      ],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "uri": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sha256": {
+          "type": "string",
+          "pattern": "^[A-Fa-f0-9]{64}$"
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "normalized_neurons",
+            "aggregated_connections",
+            "dense_index_mapping",
+            "other"
+          ]
+        },
+        "input_artifact_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "transformation_version": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}
