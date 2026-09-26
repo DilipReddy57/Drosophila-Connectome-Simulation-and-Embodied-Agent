@@ -73,6 +73,7 @@ def run_analysis(output_dir: Path):
     figures_dir.mkdir(parents=True, exist_ok=True)
     
     report_md = "# Degree and Synapse Distributions Report\n\n"
+    report_md += "**Note on Terminology**: 'Weighted degree' refers strictly to the physical tally (sum) of `synapse_count` across structural connections. This is NOT a physiological weight, conductance, or dynamic model parameter. Biological interpretation is strictly prohibited in C2.\n\n"
     
     for col in metrics_cols:
         series = degree_df[col]

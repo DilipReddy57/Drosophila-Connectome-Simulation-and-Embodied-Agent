@@ -4,16 +4,7 @@ from pathlib import Path
 from drosophila_connectome.c2.common import load_canonical_data, write_c2_report
 
 def analyze_cell_types():
-    try:
-        neurons, _ = load_canonical_data(verify=False)
-    except FileNotFoundError:
-        neurons = pl.DataFrame({
-            "cell_type": ["A", "B", None, "A"],
-            "super_class": ["X", "Y", "X", None],
-            "class": ["C1", "C2", None, None],
-            "subclass": ["S1", None, None, None],
-            "hemilineage": ["H1", "H2", None, None]
-        })
+    neurons, _ = load_canonical_data(verify=True)
 
     annotation_cols = ["cell_type", "super_class", "class", "subclass", "hemilineage"]
     
@@ -22,7 +13,13 @@ def analyze_cell_types():
             neurons = neurons.with_columns(pl.lit(None).alias(col))
 
     is_annotated = neurons.select(
-        pl.any_horizontal([pl.col(col).is_not_null() for col in annotation_cols])
+        pl.any_horizontal([
+            pl.col(col).is_not_null() & 
+            (pl.col(col) != "unknown") & 
+            (pl.col(col) != "Unknown") & 
+            (pl.col(col) != "") 
+            for col in annotation_cols
+        ])
     ).to_series()
     
     num_total = len(neurons)

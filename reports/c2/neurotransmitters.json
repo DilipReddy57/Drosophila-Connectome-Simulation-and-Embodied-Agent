@@ -1,0 +1,73 @@
+{
+  "agent": "neurotransmitters",
+  "c1_commit": "93603efdf845f691e581f1771af3630c3bb72218",
+  "dataset": "FAFB v783",
+  "raw_hashes": {
+    "classification.csv.gz": "e946b552f4056dfc977707be0674609832c3f64332a22d69dc0d9615e7aae663",
+    "connections_princeton.csv.gz": "445f996bf6c4b1803b9ba186189138a3061ff8623aa94c0abcf38af30a5bd48b",
+    "consolidated_cell_types.csv.gz": "8aba246d71dc40361677493629972ce3883048c3d02010adc42bda22962a1a2d",
+    "names.csv.gz": "e541ef9ef4b9e62d798f165ae76853d15b84174cf1dce95392f313a491055332",
+    "neurons.csv.gz": "6a6b3759e635f0f35a677d169052362131ec61d95f55919298b55c43fce4e719"
+  },
+  "pinned_canonical_hashes": {
+    "connections.parquet": "653738121089ce697ff489e3d92f82b83c5da2549dacdd9858b16f91c543e853",
+    "dense_id_mapping.parquet": "b785ce4aa4fe0857a4cf2b654ff78a73282b66302fa2138a86956d346a550aa3",
+    "neurons.parquet": "c132e6d98ab19f501fa5199cf6511184da7943cf06b3d91f5457cb16031e67bf"
+  },
+  "metrics": {
+    "OCT": {
+      "connection_count": 28985,
+      "total_synapses": 154441,
+      "synapse_fraction": 0.003048178754592173,
+      "unique_pre_neurons": 106,
+      "unique_post_neurons": 9231,
+      "mean_synapse_count": 5.328307745385544,
+      "median_synapse_count": 3.0
+    },
+    "DA": {
+      "connection_count": 63704,
+      "total_synapses": 378682,
+      "synapse_fraction": 0.007473989595680378,
+      "unique_pre_neurons": 786,
+      "unique_post_neurons": 14459,
+      "mean_synapse_count": 5.944399095818159,
+      "median_synapse_count": 3.0
+    },
+    "ACH": {
+      "connection_count": 3210049,
+      "total_synapses": 30101369,
+      "synapse_fraction": 0.5941061859864896,
+      "unique_pre_neurons": 94160,
+      "unique_post_neurons": 124421,
+      "mean_synapse_count": 9.377230378726306,
+      "median_synapse_count": 6.0
+    },
+    "GABA": {
+      "connection_count": 1172932,
+      "total_synapses": 11902450,
+      "synapse_fraction": 0.23491686286410737,
+      "unique_pre_neurons": 18374,
+      "unique_post_neurons": 116507,
+      "mean_synapse_count": 10.147604464708952,
+      "median_synapse_count": 6.0
+    },
+    "SER": {
+      "connection_count": 40396,
+      "total_synapses": 502056,
+      "synapse_fraction": 0.009909003650685555,
+      "unique_pre_neurons": 1435,
+      "unique_post_neurons": 8497,
+      "mean_synapse_count": 12.428359243489455,
+      "median_synapse_count": 6.0
+    },
+    "GLUT": {
+      "connection_count": 826380,
+      "total_synapses": 7627650,
+      "synapse_fraction": 0.15054577914844497,
+      "unique_pre_neurons": 22657,
+      "unique_post_neurons": 93431,
+      "mean_synapse_count": 9.230196761780295,
+      "median_synapse_count": 6.0
+    }
+  }
+}

@@ -1,5 +1,7 @@
 # Degree and Synapse Distributions Report
 
+**Note on Terminology**: 'Weighted degree' refers strictly to the physical tally (sum) of `synapse_count` across structural connections. This is NOT a physiological weight, conductance, or dynamic model parameter. Biological interpretation is strictly prohibited in C2.
+
 ## structural_in_degree
 
 ### Statistics

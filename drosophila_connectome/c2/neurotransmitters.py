@@ -10,8 +10,8 @@ def analyze_neurotransmitters(verify: bool = True):
     metrics_df = connections.group_by("source_nt_type").agg([
         pl.len().alias("connection_count"),
         pl.col("synapse_count").sum().alias("total_synapses"),
-        pl.col("pre_id").n_unique().alias("unique_pre_neurons"),
-        pl.col("post_id").n_unique().alias("unique_post_neurons"),
+        pl.col("pre_neuron_id").n_unique().alias("unique_pre_neurons"),
+        pl.col("post_neuron_id").n_unique().alias("unique_post_neurons"),
         pl.col("synapse_count").mean().alias("mean_synapse_count"),
         pl.col("synapse_count").median().alias("median_synapse_count")
     ]).with_columns(
@@ -53,3 +53,6 @@ def analyze_neurotransmitters(verify: bool = True):
     
     write_c2_report("neurotransmitters", metrics, "\n".join(md), Path("reports/c2"))
     return metrics
+
+if __name__ == "__main__":
+    analyze_neurotransmitters()

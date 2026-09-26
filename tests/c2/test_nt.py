@@ -6,8 +6,8 @@ from unittest.mock import patch
 def test_analyze_neurotransmitters(tmp_path):
     neurons = pl.DataFrame({"id": [1, 2]})
     connections = pl.DataFrame({
-        "pre_id": [1, 2, 1],
-        "post_id": [2, 1, 2],
+        "pre_neuron_id": [1, 2, 1],
+        "post_neuron_id": [2, 1, 2],
         "synapse_count": [10, 20, 5],
         "source_nt_type": ["ACH", "GABA", "ACH"]
     })

@@ -12,8 +12,8 @@ def analyze_regions(mock_data=None, output_dir=Path("reports/c2")):
     region_stats = connections.group_by("region").agg([
         pl.len().alias("connection_rows"),
         pl.col("synapse_count").sum().alias("total_synapses"),
-        pl.col("pre_id").n_unique().alias("unique_pre_neurons"),
-        pl.col("post_id").n_unique().alias("unique_post_neurons")
+        pl.col("pre_neuron_id").n_unique().alias("unique_pre_neurons"),
+        pl.col("post_neuron_id").n_unique().alias("unique_post_neurons")
     ])
 
     total_rows = connections.height
