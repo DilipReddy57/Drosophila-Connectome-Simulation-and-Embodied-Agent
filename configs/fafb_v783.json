@@ -5,31 +5,45 @@
   "sex": "female",
   "coverage": "brain",
   "source_id": "DATA-001",
-  "source_url": "https://flywire.ai/",
-  "license": "Verify and record the license/attribution shown for the exact official export before acquisition.",
+  "source_url": "https://codex.flywire.ai/api/download?dataset=fafb",
+  "license": "CC BY-NC 4.0",
   "files": [
     {
-      "filename": "neurons.csv",
+      "filename": "classification.csv.gz",
       "role": "neuron_metadata",
-      "format": "csv",
-      "source_url": null,
-      "reason": "Required to retain biological IDs and create deterministic dense indices."
+      "format": "csv.gz",
+      "source_url": "https://codex.flywire.ai/api/download?dataset=fafb",
+      "reason": "Primary metadata file containing root_id, flow, super_class, class, sub_class, hemilineage, side."
     },
     {
-      "filename": "connections.csv",
-      "role": "connectivity",
-      "format": "csv",
-      "source_url": null,
-      "reason": "Required to create directed aggregated biological connections."
-    },
-    {
-      "filename": "annotations.csv",
+      "filename": "consolidated_cell_types.csv.gz",
       "role": "annotations",
-      "format": "csv",
-      "source_url": null,
-      "reason": "Required only for official annotations available to the canonical neuron schema."
+      "format": "csv.gz",
+      "source_url": "https://codex.flywire.ai/api/download?dataset=fafb",
+      "reason": "Contains root_id, primary_type, additional_type(s)."
+    },
+    {
+      "filename": "names.csv.gz",
+      "role": "annotations",
+      "format": "csv.gz",
+      "source_url": "https://codex.flywire.ai/api/download?dataset=fafb",
+      "reason": "Contains root_id, name, group."
+    },
+    {
+      "filename": "neurons.csv.gz",
+      "role": "annotations",
+      "format": "csv.gz",
+      "source_url": "https://codex.flywire.ai/api/download?dataset=fafb",
+      "reason": "Contains neurotransmitter predictions and confidence scores."
+    },
+    {
+      "filename": "connections_princeton.csv.gz",
+      "role": "connectivity",
+      "format": "csv.gz",
+      "source_url": "https://codex.flywire.ai/api/download?dataset=fafb",
+      "reason": "The standard thresholded consensus graph."
     }
   ],
-  "manual_acquisition": "Use an authorized official FlyWire static export or approved CAVE/Codex workflow. Save only the three configured tables under data/raw/fafb_v783 with the listed names, then run manifest creation/verification. Do not scrape the web UI or substitute another release.",
+  "manual_acquisition": "Files were manually downloaded from Codex. The unedited .csv.gz files should be placed in data/raw/fafb_v783.",
   "retrieved_at": null
 }

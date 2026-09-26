@@ -1,4 +1,4 @@
-from connectome_sim.runtime import Connection, DiscreteNetwork, RuntimeNeuron
+from drosophila_connectome.runtime.network import Connection, DiscreteNetwork, RuntimeNeuron
 
 
 def test_synthetic_network_exhibits_excitation_inhibition_delay_and_recording():

@@ -97,10 +97,5 @@
       "sign"
     ]
   }
-  "required": ["pre_dense_index", "post_dense_index", "synapse_count", "aggregation_method", "source_version"],
-  "properties": {
-    "pre_dense_index": {"type": "integer", "minimum": 0}, "post_dense_index": {"type": "integer", "minimum": 0}, "synapse_count": {"type": "integer", "minimum": 1},
-    "region": {"type": ["string", "null"]}, "connection_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1}, "aggregation_method": {"type": "string"}, "source_version": {"type": "string"}
-  },
-  "not": {"required": ["weight", "delay", "sign"]}
+
 }

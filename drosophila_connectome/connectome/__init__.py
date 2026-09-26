@@ -1,6 +1,16 @@
 """Connectome data tooling; no neural runtime is included here."""
 """Connectome data models and data-loading utilities."""
 
-from .synthetic import SyntheticConnectome, load_synthetic_connectome
+"""Synthetic connectome and schema definitions."""
 
-__all__ = ["SyntheticConnectome", "load_synthetic_connectome"]
+from .synthetic import SyntheticConnectome, load_synthetic_connectome
+from .schema import NetworkSchema, Neuron, SchemaConnection, validate_network
+
+__all__ = [
+    "NetworkSchema",
+    "Neuron",
+    "SchemaConnection",
+    "SyntheticConnectome",
+    "load_synthetic_connectome",
+    "validate_network",
+]
