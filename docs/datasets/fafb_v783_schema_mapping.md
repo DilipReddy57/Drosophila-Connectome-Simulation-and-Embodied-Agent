@@ -36,10 +36,10 @@
 * **Columns**: `pre_root_id` (String), `post_root_id` (String), `neuropil` (String), `syn_count` (Int64), `nt_type` (String)
 * **Identifier**: None (Edge list)
 * **Connectivity**: `pre_root_id`, `post_root_id`, `syn_count`
-* **Annotation**: `neuropil` (Mapped to `region`)
-* **Excluded**: `nt_type` in connections is redundant (can be looked up via pre_root_id), excluded from C1.
+* **Annotation**: `neuropil` (Mapped to `region`), `nt_type` (Mapped to `source_nt_type`)
+* **Preserved Annotation**: The `nt_type` from this source edge is preserved strictly as `source_nt_type`, a source-derived annotation. It is **NOT** converted into excitatory/inhibitory sign, conductance, synaptic weight, or delay during Phase C1.
 * **Null Behavior**: Edges missing valid integer counts are malformed. Missing endpoints against the master node list are quarantined.
-* **Duplicate Behavior**: Summed via aggregation `sum(pre_root_id, post_root_id, neuropil)`.
+* **Duplicate Behavior**: Summed via aggregation `sum(synapse_count)` grouped by `(pre_root_id, post_root_id, neuropil, source_nt_type)`.
 
 ## Missing/Unclassified Handling Rules
 * **A. missing biological identifier**: Retain row if it has an ID, reject if strictly missing.

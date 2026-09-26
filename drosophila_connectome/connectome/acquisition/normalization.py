@@ -122,6 +122,20 @@ def normalize_dataset(config: dict, raw_root: Path, derived_root: Path) -> dict:
     if "nt_type" in conn_schema:
         agg_cols.append(pl.col("source_nt_type").first())
 
+    # Direct duplicate-group validation
+    group_sizes = retained_lazy.group_by(group_cols).agg(pl.len().alias("count"))
+    duplicate_stats = group_sizes.filter(pl.col("count") > 1).select([
+        pl.len().alias("duplicate_group_count"),
+        pl.col("count").max().alias("max_rows_per_group")
+    ]).collect()
+
+    if duplicate_stats.height > 0:
+        duplicate_group_count = duplicate_stats["duplicate_group_count"][0]
+        max_rows_per_group = duplicate_stats["max_rows_per_group"][0]
+    else:
+        duplicate_group_count = 0
+        max_rows_per_group = 1
+
     aggregated = retained_lazy.group_by(group_cols).agg(agg_cols).rename({
         "pre_root_id": "pre_neuron_id",
         "post_root_id": "post_neuron_id"
@@ -152,14 +166,16 @@ def normalize_dataset(config: dict, raw_root: Path, derived_root: Path) -> dict:
         "rejected_rows": rejected_rows,
         "quarantined_rows": quarantined_rows,
         "canonical_rows_after_aggregation": canonical_rows_after_aggregation,
+        "duplicate_group_count": duplicate_group_count,
+        "max_rows_per_group": max_rows_per_group,
         "unknown_endpoints": quarantined_rows,
         "missing_ids": 0,
         "duplicate_ids": 0,
         "malformed_rows": 0,
         "wall_clock_time_seconds": round(t1 - t0, 2),
-        "source_connectivity_threshold": 1,
+        "minimum_observed_synapse_count": 1,
         "threshold_units": "synapse_count",
-        "threshold_provenance": "Minimum observed in unthresholded connections_princeton.csv.gz"
+        "threshold_provenance": "Minimum observed synapse count in connections_princeton.csv.gz"
     }
     with (derived_root / "normalization_report.json").open("w") as f:
         json.dump(report, f, indent=2)

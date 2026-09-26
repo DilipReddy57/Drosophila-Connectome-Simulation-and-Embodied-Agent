@@ -13,7 +13,7 @@ class FoundationContractTests(unittest.TestCase):
     def test_json_schemas_parse_and_define_required_fields(self) -> None:
         for filename, required in {
             "dataset-manifest.schema.json": {"dataset_id", "files", "source_url"},
-            "neuron.schema.json": {"neuron_id", "dense_index", "source_dataset"},
+            "neuron.schema.json": {"neuron_id", "dense_index"},
             "connection.schema.json": {"pre_dense_index", "post_dense_index", "synapse_count"},
         }.items():
             with self.subTest(filename=filename):

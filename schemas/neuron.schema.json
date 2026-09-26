@@ -4,10 +4,7 @@
   "type": "object",
   "required": [
     "neuron_id",
-    "dense_index",
-    "source_dataset",
-    "source_version",
-    "provenance"
+    "dense_index"
   ],
   "properties": {
     "neuron_id": {

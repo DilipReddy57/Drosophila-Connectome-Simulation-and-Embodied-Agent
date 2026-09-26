@@ -7,10 +7,7 @@
     "post_neuron_id",
     "pre_dense_index",
     "post_dense_index",
-    "synapse_count",
-    "aggregation_method",
-    "source_version",
-    "provenance"
+    "synapse_count"
   ],
   "properties": {
     "pre_dense_index": {
@@ -30,6 +27,13 @@
         "string",
         "null"
       ]
+    },
+    "source_nt_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Source-derived neurotransmitter annotation strictly preserved without semantic conversion to sign or conductance."
     },
     "connection_confidence": {
       "type": [

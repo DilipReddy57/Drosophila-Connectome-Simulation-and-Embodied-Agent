@@ -22,9 +22,9 @@ def setup_raw(tmp_path):
 def test_manifest_hash_and_raw_immutability(tmp_path):
     raw = setup_raw(tmp_path); before = {p.name: p.read_bytes() for p in raw.iterdir()}
     path = tmp_path / "manifest.json"; build_manifest(config(), raw, path)
-    assert verify_manifest(path) == []
+    assert verify_manifest(path, override_raw_root=raw) == []
     (raw / "classification.csv.gz").write_text("changed")
-    assert "hash mismatch" in verify_manifest(path)[0]
+    assert "hash mismatch" in verify_manifest(path, override_raw_root=raw)[0]
     for name, content in before.items():
         if name != "classification.csv.gz": assert (raw / name).read_bytes() == content
 
@@ -45,6 +45,13 @@ def test_normalization_mapping_aggregation_thresholds_provenance_and_profile(tmp
     # threshold variants
     tv = threshold_variants(connections)
     assert {key: df.height for key, df in tv.items()} == {0: 4, 3: 2, 5: 1, 10: 0}
+
+    # provenance and stats report
+    report = json.loads((derived / "normalization_report.json").read_text())
+    assert "duplicate_group_count" in report
+    assert report["minimum_observed_synapse_count"] == 1
+    assert report["threshold_units"] == "synapse_count"
+    assert "connections_princeton.csv.gz" in report["threshold_provenance"]
 
     assert {p.name: p.read_bytes() for p in raw.iterdir()} == before
 
