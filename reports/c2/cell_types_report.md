@@ -14,7 +14,7 @@
 - T4c: 1710
 - T3: 1676
 - KCab: 1643
-- L5: 1581
+- Mi1: 1581
 
 ## Super_class Distribution
 - optic: 77873
