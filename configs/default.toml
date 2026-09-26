@@ -1,0 +1,3 @@
+# Shared defaults for local experiments. Add simulator settings here as they emerge.
+[simulation]
+seed = 0

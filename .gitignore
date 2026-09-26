@@ -24,4 +24,6 @@ TestResults.xml
 # Python test and bytecode caches
 __pycache__/
 .pytest_cache/
+# Python bytecode
+__pycache__/
 *.py[cod]
