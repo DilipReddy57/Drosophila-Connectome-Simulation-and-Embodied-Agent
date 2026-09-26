@@ -1,0 +1,3 @@
+root_id,neurotransmitter,neurotransmitter_confidence,hemilineage,neuropil,is_sensory,is_motor
+10,ACh,0.9,1,AL,true,false
+20,GABA,0.8,2,VNC,false,true

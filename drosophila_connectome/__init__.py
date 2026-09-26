@@ -1,3 +1,4 @@
+"""Drosophila connectome research tooling."""
 """Drosophila connectome simulation and embodied-agent research toolkit."""
 
 from .connectome import SyntheticConnectome, load_synthetic_connectome

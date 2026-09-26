@@ -29,6 +29,12 @@ data/raw/**
 !data/raw/.gitkeep
 
 # Python test artifacts
+__pycache__/
+*.py[cod]
+# Generated canonical artifacts and acquisition resumptions
+data/derived/fafb_v783/
+data/raw/fafb_v783/**
+!data/raw/fafb_v783/.gitkeep
 # Python bytecode
 __pycache__/
 *.py[cod]
