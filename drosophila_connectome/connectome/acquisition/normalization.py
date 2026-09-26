@@ -173,7 +173,7 @@ def normalize_dataset(config: dict, raw_root: Path, derived_root: Path) -> dict:
         "duplicate_ids": 0,
         "malformed_rows": 0,
         "wall_clock_time_seconds": round(t1 - t0, 2),
-        "minimum_observed_synapse_count": 1,
+        "minimum_observed_synapse_count": int(connections["synapse_count"].min()) if connections.height > 0 else 0,
         "threshold_units": "synapse_count",
         "threshold_provenance": "Minimum observed synapse count in connections_princeton.csv.gz"
     }

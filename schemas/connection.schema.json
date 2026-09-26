@@ -48,11 +48,9 @@
       ]
     }
   },
-  "not": {
-    "required": [
-      "weight",
-      "delay",
-      "sign"
-    ]
-  }
+  "allOf": [
+    { "not": { "required": ["weight"] } },
+    { "not": { "required": ["delay"] } },
+    { "not": { "required": ["sign"] } }
+  ]
 }

@@ -24,13 +24,22 @@ class FoundationContractTests(unittest.TestCase):
         neuron_schema = json.loads((ROOT / "schemas" / "neuron.schema.json").read_text())
         conn_schema = json.loads((ROOT / "schemas" / "connection.schema.json").read_text())
 
-        for field in ("source_dataset", "source_version", "provenance"):
+        for field in ("source_dataset", "source_version", "provenance", "neuropil"):
             self.assertNotIn(field, neuron_schema["properties"])
 
         for field in ("source_version", "provenance", "aggregation_method"):
             self.assertNotIn(field, conn_schema["properties"])
 
         self.assertIn("source_nt_type", conn_schema["properties"])
+
+        # Verify weight, delay, sign are individually prohibited
+        self.assertIn("allOf", conn_schema)
+        forbidden_fields = set()
+        for clause in conn_schema["allOf"]:
+            if "not" in clause and "required" in clause["not"]:
+                forbidden_fields.update(clause["not"]["required"])
+        for field in ("weight", "delay", "sign"):
+            self.assertIn(field, forbidden_fields)
 
     def test_source_registry_has_unique_ids_and_valid_tiers(self) -> None:
         with (ROOT / "research" / "source_registry" / "sources.csv").open(newline="") as handle:
