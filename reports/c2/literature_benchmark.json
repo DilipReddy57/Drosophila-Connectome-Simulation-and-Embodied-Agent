@@ -1,0 +1,64 @@
+{
+  "benchmark_metrics": [
+    {
+      "metric_name": "neuron_count",
+      "external_value": 139255,
+      "source": "Dorkenwald et al. 2024 Nature",
+      "doi_url": "https://doi.org/10.1038/s41586-024-07558-y",
+      "dataset_version": "FlyWire FAFB v783",
+      "sex": "Female",
+      "scope": "Whole-brain",
+      "definition": "Number of proofread neurons in the whole-brain connectome",
+      "matches_our_convention": "YES",
+      "notes": "Matches our local canonical connection count exactly."
+    },
+    {
+      "metric_name": "neuron_count_model",
+      "external_value": 125000,
+      "source": "Shiu et al. 2024 Nature",
+      "doi_url": "https://doi.org/10.1038/s41586-024-07981-1",
+      "dataset_version": "FlyWire FAFB v783",
+      "sex": "Female",
+      "scope": "Computational sensorimotor brain model",
+      "definition": "Filtered subset of neurons included in functional simulation",
+      "matches_our_convention": "NO",
+      "notes": "Our dataset retains the full 139,255 graph. This model-specific value represents a thresholded subgraph."
+    },
+    {
+      "metric_name": "total_synapse_count",
+      "external_value": 54500000,
+      "source": "Dorkenwald et al. 2024 Nature",
+      "doi_url": "https://doi.org/10.1038/s41586-024-07558-y",
+      "dataset_version": "FlyWire FAFB v783",
+      "sex": "Female",
+      "scope": "Whole-brain",
+      "definition": "Total chemical synapses across proofread neurons",
+      "matches_our_convention": "PARTIAL",
+      "notes": "External count is ~54.5M. Our total_synapse_count is 50,666,648. Difference is typical of connectome processing rules."
+    },
+    {
+      "metric_name": "total_synapse_count_model",
+      "external_value": 50000000,
+      "source": "Shiu et al. 2024 Nature",
+      "doi_url": "https://doi.org/10.1038/s41586-024-07981-1",
+      "dataset_version": "FlyWire FAFB v783",
+      "sex": "Female",
+      "scope": "Computational sensorimotor brain model",
+      "definition": "Synaptic edges preserved in the dynamical simulation",
+      "matches_our_convention": "PARTIAL",
+      "notes": "Their reported ~50M is very close to our 50,666,648 tally."
+    },
+    {
+      "metric_name": "cell_type_count",
+      "external_value": 8453,
+      "source": "Schlegel et al. 2024 Nature / FlyWire Codex",
+      "doi_url": "https://doi.org/10.1038/s41586-024-07686-5",
+      "dataset_version": "FlyWire FAFB v783",
+      "sex": "Female",
+      "scope": "Whole-brain",
+      "definition": "Unique distinct cell type annotations assigned to proofread neurons",
+      "matches_our_convention": "PARTIAL",
+      "notes": "Our pipeline pulls from consolidated_cell_types.csv.gz. Strict match depends on the timestamp/version of annotations mirrored locally."
+    }
+  ]
+}
