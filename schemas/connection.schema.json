@@ -35,20 +35,6 @@
       ],
       "description": "Source-derived neurotransmitter annotation strictly preserved without semantic conversion to sign or conductance."
     },
-    "connection_confidence": {
-      "type": [
-        "number",
-        "null"
-      ],
-      "minimum": 0,
-      "maximum": 1
-    },
-    "aggregation_method": {
-      "type": "string"
-    },
-    "source_version": {
-      "type": "string"
-    },
     "pre_neuron_id": {
       "type": [
         "string",
@@ -60,38 +46,6 @@
         "string",
         "integer"
       ]
-    },
-    "provenance": {
-      "type": "object",
-      "required": [
-        "raw_artifact",
-        "raw_sha256",
-        "normalization_version",
-        "generated_at"
-      ],
-      "properties": {
-        "raw_artifact": {
-          "type": "string"
-        },
-        "raw_sha256": {
-          "type": "string",
-          "pattern": "^[A-Fa-f0-9]{64}$"
-        },
-        "source_row": {
-          "type": [
-            "string",
-            "integer",
-            "null"
-          ]
-        },
-        "normalization_version": {
-          "type": "string"
-        },
-        "generated_at": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
     }
   },
   "not": {
@@ -101,5 +55,4 @@
       "sign"
     ]
   }
-
 }

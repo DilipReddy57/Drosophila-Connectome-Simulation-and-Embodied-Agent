@@ -72,68 +72,6 @@
       ],
       "minimum": 0,
       "maximum": 1
-    },
-    "is_sensory": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "is_interneuron": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "is_motor": {
-      "type": [
-        "boolean",
-        "null"
-      ]
-    },
-    "morphology_ref": {
-      "type": [
-        "string",
-        "null"
-      ]
-    },
-    "source_dataset": {
-      "type": "string"
-    },
-    "source_version": {
-      "type": "string"
-    },
-    "provenance": {
-      "type": "object",
-      "required": [
-        "raw_artifact",
-        "raw_sha256",
-        "normalization_version",
-        "generated_at"
-      ],
-      "properties": {
-        "raw_artifact": {
-          "type": "string"
-        },
-        "raw_sha256": {
-          "type": "string",
-          "pattern": "^[A-Fa-f0-9]{64}$"
-        },
-        "source_row": {
-          "type": [
-            "string",
-            "integer",
-            "null"
-          ]
-        },
-        "normalization_version": {
-          "type": "string"
-        },
-        "generated_at": {
-          "type": "string",
-          "format": "date-time"
-        }
-      }
-    }
     }
   }
+}

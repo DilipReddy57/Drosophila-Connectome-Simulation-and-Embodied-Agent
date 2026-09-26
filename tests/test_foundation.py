@@ -20,6 +20,18 @@ class FoundationContractTests(unittest.TestCase):
                 schema = json.loads((ROOT / "schemas" / filename).read_text())
                 self.assertTrue(required.issubset(schema["required"]))
 
+    def test_c1_schemas_do_not_contain_future_fields(self) -> None:
+        neuron_schema = json.loads((ROOT / "schemas" / "neuron.schema.json").read_text())
+        conn_schema = json.loads((ROOT / "schemas" / "connection.schema.json").read_text())
+
+        for field in ("source_dataset", "source_version", "provenance"):
+            self.assertNotIn(field, neuron_schema["properties"])
+
+        for field in ("source_version", "provenance", "aggregation_method"):
+            self.assertNotIn(field, conn_schema["properties"])
+
+        self.assertIn("source_nt_type", conn_schema["properties"])
+
     def test_source_registry_has_unique_ids_and_valid_tiers(self) -> None:
         with (ROOT / "research" / "source_registry" / "sources.csv").open(newline="") as handle:
             records = list(csv.DictReader(handle))
