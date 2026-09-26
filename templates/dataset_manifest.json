@@ -1,0 +1,20 @@
+{
+  "dataset_id": "fafb_v783_example",
+  "name": "FlyWire FAFB",
+  "version": "v783",
+  "sex": "female",
+  "coverage": "brain",
+  "source_id": "DATA-001",
+  "source_url": "https://REPLACE_WITH_EXACT_OFFICIAL_EXPORT_URL",
+  "license": "REPLACE_WITH_LICENSE",
+  "retrieved_at": "YYYY-MM-DDTHH:MM:SSZ",
+  "files": [
+    {
+      "path": "data/raw/fafb_v783/REPLACE_FILENAME",
+      "sha256": "REPLACE_WITH_SHA256",
+      "role": "neurons|connections|annotations|morphology",
+      "format": "parquet|csv|hdf5|other"
+    }
+  ],
+  "notes": "Immutable raw snapshot; do not edit in place."
+}

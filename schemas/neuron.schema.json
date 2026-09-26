@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Canonical neuron record",
+  "type": "object",
+  "required": ["neuron_id", "dense_index", "source_dataset", "source_version"],
+  "properties": {
+    "neuron_id": {"type": ["string", "integer"]}, "dense_index": {"type": "integer", "minimum": 0},
+    "cell_type": {"type": ["string", "null"]}, "super_class": {"type": ["string", "null"]}, "class": {"type": ["string", "null"]}, "subclass": {"type": ["string", "null"]}, "hemilineage": {"type": ["string", "null"]}, "neuropil": {"type": ["string", "null"]}, "side": {"type": ["string", "null"]},
+    "neurotransmitter": {"type": ["string", "null"]}, "neurotransmitter_confidence": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+    "is_sensory": {"type": ["boolean", "null"]}, "is_interneuron": {"type": ["boolean", "null"]}, "is_motor": {"type": ["boolean", "null"]}, "morphology_ref": {"type": ["string", "null"]}, "source_dataset": {"type": "string"}, "source_version": {"type": "string"}
+  }
+}
