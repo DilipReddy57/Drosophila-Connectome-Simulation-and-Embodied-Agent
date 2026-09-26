@@ -39,7 +39,7 @@
 * **Annotation**: `neuropil` (Mapped to `region`), `nt_type` (Mapped to `source_nt_type`)
 * **Preserved Annotation**: The `nt_type` from this source edge is preserved strictly as `source_nt_type`, a source-derived annotation. It is **NOT** converted into excitatory/inhibitory sign, conductance, synaptic weight, or delay during Phase C1.
 * **Null Behavior**: Edges missing valid integer counts are malformed. Missing endpoints against the master node list are quarantined.
-* **Duplicate Behavior**: Summed via aggregation `sum(synapse_count)` grouped by `(pre_root_id, post_root_id, neuropil, source_nt_type)`.
+* **Duplicate Behavior**: Grouped by `(pre_root_id, post_root_id, neuropil)` with `sum(synapse_count)`. The `source_nt_type` is preserved via `.first()` as a source-derived annotation on the canonical edge; it is NOT a grouping key.
 
 ## Missing/Unclassified Handling Rules
 * **A. missing biological identifier**: Retain row if it has an ID, reject if strictly missing.
@@ -50,7 +50,12 @@
 * **F. malformed row**: Reject (record count).
 
 ## Connection Aggregation
-* **Source representation**: One row = single-neuropil aggregate of synapses between two proofread neurons.
-* **Grouping keys**: `pre_root_id`, `post_root_id`, `neuropil`
-* **Aggregation function**: `sum(syn_count)`
-* **Biological meaning**: Total structural synapses between a specific presynaptic and postsynaptic neuron within a specific brain region. No weights or model dynamics are inferred during C1.
+
+This is a **data-model transformation**, not a biological interpretation.
+
+* **Grouping keys**: `pre_root_id`, `post_root_id`, `region` (canonical name for source `neuropil`)
+* **Aggregation function**: `sum(synapse_count)`
+* **`source_nt_type` handling**: Preserved via `.first()` as a source-derived annotation on the canonical edge. It is **not** a grouping key. If multiple `nt_type` values existed for the same `(pre, post, region)` tuple, only the first would be retained — but the FAFB v783 export contains zero such duplicate groups (verified by direct duplicate-group validation).
+* **Duplicate-group validation**: Before aggregation, the pipeline explicitly counts groups with more than one row. For the FAFB v783 `connections_princeton.csv.gz`, `duplicate_group_count = 0`, confirming that the source file is already structurally unique by `(pre_root_id, post_root_id, neuropil)`.
+* **Deterministic ordering**: Canonical output is sorted by `(pre_dense_index, post_dense_index, region)` to guarantee byte-identical Parquet artifacts across repeated executions.
+* **What C1 does NOT do**: No synaptic weights, conductances, delays, excitatory/inhibitory signs, or model dynamics are inferred. The `source_nt_type` annotation is strictly passthrough.
