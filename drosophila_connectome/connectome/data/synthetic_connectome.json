@@ -1,0 +1,12 @@
+{
+  "description": "A minimal synthetic circuit for development and tests; it is not biological data.",
+  "neurons": [
+    {"id": "SENSORY_L", "type": "sensory"},
+    {"id": "INTERNEURON", "type": "interneuron"},
+    {"id": "MOTOR_R", "type": "motor"}
+  ],
+  "synapses": [
+    {"source": "SENSORY_L", "target": "INTERNEURON", "weight": 0.8},
+    {"source": "INTERNEURON", "target": "MOTOR_R", "weight": 0.6}
+  ]
+}
