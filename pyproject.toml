@@ -11,3 +11,25 @@ requires-python = ">=3.10"
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 pythonpath = ["."]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "drosophila-connectome-simulation"
+version = "0.1.0"
+description = "Tools for experimenting with Drosophila connectomes and embodied agents."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Drosophila Connectome Simulation contributors" }]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["drosophila_connectome"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+

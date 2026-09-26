@@ -21,6 +21,9 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+# Python test and bytecode caches
+__pycache__/
+.pytest_cache/
 # Reproducible scientific data artifacts: preserve manifests, never commit raw snapshots.
 data/raw/**
 !data/raw/.gitkeep
@@ -32,3 +35,6 @@ __pycache__/
 data/derived/fafb_v783/
 data/raw/fafb_v783/**
 !data/raw/fafb_v783/.gitkeep
+# Python bytecode
+__pycache__/
+*.py[cod]
