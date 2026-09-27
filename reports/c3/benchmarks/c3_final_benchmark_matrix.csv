@@ -1,0 +1,4 @@
+experiment,dataset,input_population,implementation,total_spikes,MN9_rate,active_neurons,Brian2_rate,difference,status
+Reference,v630,21_sugar,Brian2,9756,69,352,-,-,GO
+Control,v630,20_sugar,Brian2,8774,58,340,-,-,GO
+Variant,v783,20_sugar,Custom,16603,110,654,107,3,GO

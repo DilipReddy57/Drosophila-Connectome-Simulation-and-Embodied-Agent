@@ -14,12 +14,14 @@ def update_neurons(state, params, external_I=None):
     spikes = state.V >= params.V_th
     
     state.V[spikes] = params.V_reset
+    state.I_syn[spikes] = 0.0
     state.refractory_time[spikes] = params.refractory_steps
     
     in_refractory = state.refractory_time > 0
     state.refractory_time[in_refractory] -= 1
     
     state.V[state.refractory_time > 0] = params.V_reset
+    state.I_syn[state.refractory_time > 0] = 0.0
     
     return spikes
 
