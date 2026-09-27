@@ -1,7 +1,7 @@
 # Phase C2 Final Report: Graph Analytics & Biological Sanity Validation
 
 ## 1. Objective
-To independently verify the canonical graph representation, characterize topology, degree, and synapse distributions, analyze annotations (regions, cell types, neurotransmitters), and perform reproducible measurement without biological modeling inferences.
+To perform structural validation of the canonical graph representation, characterize topology, degree, and synapse distributions, analyze annotations (regions, cell types, neurotransmitters), and perform reproducible measurement without biological modeling inferences.
 
 ## 2. Dataset Identity & C1 Input
 - **Dataset**: FlyWire FAFB v783 (adult female brain)
@@ -12,7 +12,7 @@ To independently verify the canonical graph representation, characterize topolog
 Metrics were extracted cleanly from the canonical data (`neurons.parquet`, `connections.parquet`, `dense_id_mapping.parquet`). See `metric_registry.yaml` for exact definitions. Computations utilized Polars, igraph, and scipy for sparse matrix operations.
 
 ## 4. Data Integrity (Agent A)
-The graph explicitly matches 139,255 canonical neurons, 5,342,446 connection rows, and 50,666,648 synapses. The locked FAFB v783 raw and canonical datasets contain zero direct self-loop rows under the tested neuron-ID definitions. The provenance of the previously reported 56,231 value is CONFIRMED_PLANNING_OR_TRANSCRIPTION_ERROR.
+The graph explicitly matches 139,255 canonical neurons, 5,342,446 connection rows, and 50,666,648 synapses. The locked FAFB v783 raw and canonical datasets contain zero direct self-loop rows under the tested neuron-ID definitions. 56,231 was a planning/transcription artifact. Direct inspection of the FAFB v783 raw connections and canonical C1 connections found 0 self-loops.
 
 ## 5. Degree Distributions (Agent B)
 Calculated `structural_in_degree`, `structural_out_degree`, `structural_total_degree`, `incoming_synapse_count`, `outgoing_synapse_count`, and `total_synapse_count`. All physiological terminology (e.g. 'weighted degree', 'conductance') has been purged.
@@ -36,7 +36,7 @@ Evidence documented across corresponding structural filters for FAFB v783. The d
 Reproducibility status is PARTIALLY VERIFIED. Hashes matched in the current environment, but independent cross-machine verification was not performed.
 
 ## 12. Audit Findings (Agent H)
-The final 'GO' audit documented in `cross_agent_audit.md` and `cross_agent_audit.json` was conducted and asserted by the C2 coordinator. It does NOT represent a genuinely independent execution pass by a distinct Subagent H on the post-fix tree.
+The final 'GO' audit documented in `cross_agent_audit.md` and `cross_agent_audit.json` was conducted and asserted by the C2 coordinator. It does NOT represent a genuinely independent execution pass by a distinct Subagent H on the post-fix tree. Independent audit status is NOT_PERFORMED.
 
 ## 13. Limitations & Out-of-Scope Items
 No dynamic parameters (delays, conductances, LIFs) were established. The measurements are strictly graph-theoretic and physical annotation derivations.

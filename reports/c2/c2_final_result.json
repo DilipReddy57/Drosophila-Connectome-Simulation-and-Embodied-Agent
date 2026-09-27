@@ -13,29 +13,5 @@
     "regions",
     "topology"
   ],
-  "agent_h_audit": {
-    "status": "CONDITIONAL_GO",
-    "findings": [
-      {
-        "severity": "MAJOR",
-        "category": "Reproducibility",
-        "description": "Reproducibility claims fail to state PARTIALLY VERIFIED. Since a fresh independent env wasn't used, this exact classification must be present."
-      },
-      {
-        "severity": "MINOR",
-        "category": "Scope Boundaries",
-        "description": "The metric registry still uses the terms 'weighted_in_degree' and 'weighted_out_degree'. Even with caveats explaining they are synapse tallies, the term 'weighted' violates the strict NO weights rule."
-      },
-      {
-        "severity": "OBSERVATION",
-        "category": "Self-Edges",
-        "description": "Self-edge anomaly of 56,231 successfully identified as a transcription error and verified as 0 in real data tests."
-      },
-      {
-        "severity": "OBSERVATION",
-        "category": "Cell Types",
-        "description": "Cell-type terminology correctly isolates any_taxonomic, super_class, and cell_type."
-      }
-    ]
-  }
+  "independent_audit_status": "NOT_PERFORMED"
 }
