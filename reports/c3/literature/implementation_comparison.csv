@@ -1,0 +1,13 @@
+Parameter,Value
+Simulation Backend,Brian2
+v_0 (Resting Potential),-52 * mV
+v_rst (Reset Potential),-52 * mV
+v_th (Spiking Threshold),-45 * mV
+t_mbr (Membrane Time Scale),20 * ms
+tau (Synaptic Decay),5 * ms
+t_rfc (Refractory Period),2.2 * ms
+t_dly (Synaptic Delay),1.8 * ms
+w_syn (Weight per Synapse),0.275 * mV
+Connectome Version,FAFB v630 (default) and v783
+Neurotransmitter Signs,1 for excitatory; -1 for inhibitory
+Synaptic Weight Calculation,Synapse Count * Neurotransmitter Sign * w_syn
