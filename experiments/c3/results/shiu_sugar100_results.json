@@ -1,0 +1,11 @@
+{
+  "experiment": "sugarR_100Hz",
+  "duration_ms": 1000,
+  "custom": {
+    "mn9_rate": 0,
+    "total_spikes": 0,
+    "runtime_s": 79.24800992012024
+  },
+  "brian2_reference": {
+    "mn9_rate": 0,
+    "total_spikes": 
