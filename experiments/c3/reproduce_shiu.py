@@ -187,8 +187,8 @@ def main():
     
     run_baseline(sg)
     
-    c_mn9, c_total, c_t = run_custom_model(sg, sugar_dense, mn9_dense)
-    b_mn9, b_total, b_t = run_brian2_reference(sg, sugar_dense, mn9_dense)
+    int(c_mn9), int(float(c_t)otal), float(c_t) = run_custom_model(sg, sugar_dense, mn9_dense)
+    int(b_mn9), int(float(b_t)otal), float(b_t) = run_brian2_reference(sg, sugar_dense, mn9_dense)
     
     out_dir = Path("experiments/c3/results")
     
@@ -197,17 +197,17 @@ def main():
             "experiment": "sugarR_100Hz",
             "duration_ms": 1000,
             "custom": {
-                "mn9_rate": c_mn9,
-                "total_spikes": c_total,
-                "runtime_s": c_t
+                "mn9_rate": int(c_mn9),
+                "total_spikes": int(float(c_t)otal),
+                "runtime_s": float(c_t)
             },
             "brian2_reference": {
-                "mn9_rate": b_mn9,
-                "total_spikes": b_total,
-                "runtime_s": b_t
+                "mn9_rate": int(b_mn9),
+                "total_spikes": int(float(b_t)otal),
+                "runtime_s": float(b_t)
             },
             "diff_mn9_rate": abs(c_mn9 - b_mn9),
-            "diff_total_spikes": abs(c_total - b_total)
+            "diff_total_spikes": abs(float(c_t)otal - float(b_t)otal)
         }, f, indent=2)
         
 if __name__ == "__main__":
