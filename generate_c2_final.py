@@ -44,7 +44,7 @@ def generate_final_report():
         "Metrics were extracted cleanly from the canonical data (`neurons.parquet`, `connections.parquet`, `dense_id_mapping.parquet`). See `metric_registry.yaml` for exact definitions. Computations utilized Polars, igraph, and scipy for sparse matrix operations.",
         "",
         "## 4. Data Integrity (Agent A)",
-        "The graph explicitly matches 139,255 canonical neurons, 5,342,446 connection rows, and 50,666,648 synapses. **0 self-edges** were found, reflecting the empirical truth of the raw FAFB v783 dataset (overriding the provisional assumption of 56,231 autapses).",
+        "The graph explicitly matches 139,255 canonical neurons, 5,342,446 connection rows, and 50,666,648 synapses. The locked FAFB v783 raw and canonical datasets contain zero direct self-loop rows under the tested neuron-ID definitions. The provenance of the previously reported 56,231 value is CONFIRMED_PLANNING_OR_TRANSCRIPTION_ERROR.",
         "",
         "## 5. Degree Distributions (Agent B)",
         "In/out structural degrees and synapse-tally distributions computed. The 'weighted degree' term used strictly reflects a physical synapse tally, not a functional physiological weight.",

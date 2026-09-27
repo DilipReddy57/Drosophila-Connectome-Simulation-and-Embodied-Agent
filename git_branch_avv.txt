@@ -1,0 +1,30 @@
++ c2/agent-a-integrity                                                  4c92639 (C:/Users/User/.gemini/antigravity/brain/0be249be-07c6-4087-9e9d-9130da17ee68/.system_generated/worktrees/subagent-Agent-A--Data-Integrity--self-69681a76) feat(c2): implement data integrity checks and tests
++ c2/agent-b-degree                                                     6d20749 (C:/Users/User/.gemini/antigravity/brain/0be249be-07c6-4087-9e9d-9130da17ee68/.system_generated/worktrees/subagent-Agent-B--Degree-Analysis--self-efd19e22) Implement degree analysis
++ c2/agent-c-topology                                                   ae17589 (C:/Users/User/.gemini/antigravity/brain/0be249be-07c6-4087-9e9d-9130da17ee68/.system_generated/worktrees/subagent-Agent-C--Graph-Topology--self-9032ff86) feat: Add C2 graph topology analysis (Agent C)
++ c2/agent-d-regions                                                    14b1c89 (C:/Users/User/.gemini/antigravity/brain/0be249be-07c6-4087-9e9d-9130da17ee68/.system_generated/worktrees/subagent-Agent-D--Region-Analysis--self-6bea8f04) feat: region analysis implementation and tests
++ c2/agent-e-nt                                                         492aa12 (C:/Users/User/.gemini/antigravity/brain/0be249be-07c6-4087-9e9d-9130da17ee68/.system_generated/worktrees/subagent-Agent-E--NT-Analysis--self-1dd56f66) Agent E: NT Analysis for Phase C2
++ c2/agent-f-celltypes                                                  e8c70e5 (C:/Users/User/.gemini/antigravity/brain/0be249be-07c6-4087-9e9d-9130da17ee68/.system_generated/worktrees/subagent-Agent-F--Cell-Type-Analysis--self-9283100d) Implement cell-type analysis script and generate reports
++ c2/agent-g-benchmarks                                                 d88aa25 (C:/Users/User/.gemini/antigravity/brain/0be249be-07c6-4087-9e9d-9130da17ee68/.system_generated/worktrees/subagent-Agent-G--Literature-Benchmark--self-80858e0e) chore: add C2 literature benchmarks from FlyWire Nature 2024 sources
++ c2/agent-h-audit                                                      ef2debe (C:/Users/User/.gemini/antigravity/brain/0be249be-07c6-4087-9e9d-9130da17ee68/.system_generated/worktrees/subagent-Agent-H--Adversarial-Auditor--self-bb35f933) feat(audit): add C2 adversarial audit report
+  feat/c1-fafb-v783-polars                                              ca6fdda [origin/feat/c1-fafb-v783-polars] docs: correct aggregation documentation to match implementation
+  feat/c2-foundation                                                    4d36b68 chore: establish C2 foundation scaffolding with dependencies and metric registry
+* feat/c2-integration                                                   96dd541 fix: resolve Agent H audit findings across C2 foundation
+  main                                                                  93603ef [origin/main] Merge pull request #7 from DilipReddy57/feat/c1-fafb-v783-polars
+  subagent-Agent-A--Data-Integrity--self-69681a76                       4d36b68 chore: establish C2 foundation scaffolding with dependencies and metric registry
+  subagent-Agent-B--Degree-Analysis--self-efd19e22                      4d36b68 chore: establish C2 foundation scaffolding with dependencies and metric registry
+  subagent-Agent-C--Graph-Topology--self-9032ff86                       4d36b68 chore: establish C2 foundation scaffolding with dependencies and metric registry
+  subagent-Agent-D--Region-Analysis--self-6bea8f04                      4d36b68 chore: establish C2 foundation scaffolding with dependencies and metric registry
+  subagent-Agent-E--NT-Analysis--self-1dd56f66                          4d36b68 chore: establish C2 foundation scaffolding with dependencies and metric registry
+  subagent-Agent-F--Cell-Type-Analysis--self-9283100d                   4d36b68 chore: establish C2 foundation scaffolding with dependencies and metric registry
+  subagent-Agent-G--Literature-Benchmark--self-80858e0e                 4d36b68 chore: establish C2 foundation scaffolding with dependencies and metric registry
+  subagent-Agent-H--Adversarial-Auditor--self-bb35f933                  ccd2eaf chore: integrate C2 analytical reports and figures
+  remotes/origin/HEAD                                                   -> origin/main
+  remotes/origin/c2/agent-a-integrity                                   4c92639 feat(c2): implement data integrity checks and tests
+  remotes/origin/codex/add-automated-tests-for-neuron/connection-schema 263b372 Merge branch 'main' into codex/add-automated-tests-for-neuron/connection-schema
+  remotes/origin/codex/add-schema-definitions-for-connectome            80e2aea Add connectome data schemas
+  remotes/origin/codex/create-initial-repository-structure-and-package  5007328 Initialize project structure and synthetic fixture
+  remotes/origin/codex/create-requirements-documentation-template       bf9eeb6 Add initial project requirements template
+  remotes/origin/codex/create-requirements-file-for-simulation          2e64567 Merge branch 'main' into codex/create-requirements-file-for-simulation
+  remotes/origin/codex/create-requirements-file-for-simulation-ky7014   ba9e02d Merge branch 'main' into codex/create-requirements-file-for-simulation-ky7014
+  remotes/origin/feat/c1-fafb-v783-polars                               ca6fdda docs: correct aggregation documentation to match implementation
+  remotes/origin/main                                                   93603ef Merge pull request #7 from DilipReddy57/feat/c1-fafb-v783-polars

@@ -12,24 +12,29 @@ def analyze_cell_types():
         if col not in neurons.columns:
             neurons = neurons.with_columns(pl.lit(None).alias(col))
 
-    is_annotated = neurons.select(
-        pl.any_horizontal([
+    def is_valid_annotation(col):
+        return (
             pl.col(col).is_not_null() & 
             (pl.col(col) != "unknown") & 
             (pl.col(col) != "Unknown") & 
-            (pl.col(col) != "") 
-            for col in annotation_cols
-        ])
-    ).to_series()
-    
+            (pl.col(col) != "")
+        )
+
     num_total = len(neurons)
-    num_annotated = is_annotated.sum()
-    num_unannotated = num_total - num_annotated
+    
+    coverages = {}
+    for col in annotation_cols:
+        count = neurons.filter(is_valid_annotation(col)).height
+        coverages[f"{col}_coverage"] = f"{count}/{num_total}"
+        
+    any_taxonomic = neurons.filter(
+        pl.any_horizontal([is_valid_annotation(c) for c in annotation_cols])
+    ).height
+    coverages["any_taxonomic_annotation_coverage"] = f"{any_taxonomic}/{num_total}"
 
     metrics = {
         "total_neurons": num_total,
-        "annotated_neurons": int(num_annotated),
-        "unannotated_neurons": int(num_unannotated),
+        "coverages": coverages,
         "categories_distribution": {}
     }
 
@@ -37,10 +42,10 @@ def analyze_cell_types():
         "# Cell-Type Analysis Report",
         "",
         f"- **Total Neurons:** {num_total}",
-        f"- **Annotated:** {num_annotated}",
-        f"- **Unannotated:** {num_unannotated}",
-        ""
     ]
+    for k, v in coverages.items():
+        markdown_lines.append(f"- **{k}:** {v}")
+    markdown_lines.append("")
 
     fig_dir = Path("reports/c2/figures")
     fig_dir.mkdir(parents=True, exist_ok=True)

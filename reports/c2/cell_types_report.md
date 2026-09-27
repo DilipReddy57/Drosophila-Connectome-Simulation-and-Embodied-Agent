@@ -1,8 +1,12 @@
 # Cell-Type Analysis Report
 
 - **Total Neurons:** 139255
-- **Annotated:** 139255
-- **Unannotated:** 0
+- **cell_type_coverage:** 138327/139255
+- **super_class_coverage:** 139255/139255
+- **class_coverage:** 107591/139255
+- **subclass_coverage:** 100236/139255
+- **hemilineage_coverage:** 37542/139255
+- **any_taxonomic_annotation_coverage:** 139255/139255
 
 ## Cell_type Distribution
 - R1-6: 8456

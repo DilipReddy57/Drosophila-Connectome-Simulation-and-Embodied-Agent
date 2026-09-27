@@ -21,27 +21,27 @@ def test_compute_degrees():
     assert a["structural_out_degree"] == 2 # to B, C
     assert a["structural_in_degree"] == 1 # from B
     assert a["structural_total_degree"] == 3
-    assert a["weighted_out_degree"] == 3 # 1+2
-    assert a["weighted_in_degree"] == 5 # from B is 2+3
-    assert a["weighted_total_degree"] == 8
+    assert a["outgoing_synapse_count"] == 3 # 1+2
+    assert a["incoming_synapse_count"] == 5 # from B is 2+3
+    assert a["total_synapse_count"] == 8
     
     # Check B
     b = res.filter(pl.col("neuron_id") == "B").row(0, named=True)
     assert b["structural_out_degree"] == 2 # to A, C
     assert b["structural_in_degree"] == 1 # from A
     assert b["structural_total_degree"] == 3
-    assert b["weighted_out_degree"] == 6 # 1+2+3
-    assert b["weighted_in_degree"] == 1 # from A
-    assert b["weighted_total_degree"] == 7
+    assert b["outgoing_synapse_count"] == 6 # 1+2+3
+    assert b["incoming_synapse_count"] == 1 # from A
+    assert b["total_synapse_count"] == 7
     
     # Check C
     c = res.filter(pl.col("neuron_id") == "C").row(0, named=True)
     assert c["structural_out_degree"] == 0
     assert c["structural_in_degree"] == 2 # from A, B
     assert c["structural_total_degree"] == 2
-    assert c["weighted_out_degree"] == 0
-    assert c["weighted_in_degree"] == 3 # 2+1
-    assert c["weighted_total_degree"] == 3
+    assert c["outgoing_synapse_count"] == 0
+    assert c["incoming_synapse_count"] == 3 # 2+1
+    assert c["total_synapse_count"] == 3
 
 def test_compute_distribution_stats():
     series = pl.Series([1.0, 2.0, 3.0, 4.0, 5.0])

@@ -13,20 +13,20 @@ def compute_degrees(neurons: pl.DataFrame, connections: pl.DataFrame) -> pl.Data
     out_structural = unique_edges.group_by("pre_neuron_id").agg(pl.len().alias("structural_out_degree"))
     in_structural = unique_edges.group_by("post_neuron_id").agg(pl.len().alias("structural_in_degree"))
     
-    out_weighted = unique_edges.group_by("pre_neuron_id").agg(pl.col("synapse_count").sum().alias("weighted_out_degree"))
-    in_weighted = unique_edges.group_by("post_neuron_id").agg(pl.col("synapse_count").sum().alias("weighted_in_degree"))
+    out_synapses = unique_edges.group_by("pre_neuron_id").agg(pl.col("synapse_count").sum().alias("outgoing_synapse_count"))
+    in_synapses = unique_edges.group_by("post_neuron_id").agg(pl.col("synapse_count").sum().alias("incoming_synapse_count"))
     
     res = neurons.select(["neuron_id"])
     res = res.join(out_structural, left_on="neuron_id", right_on="pre_neuron_id", how="left")
     res = res.join(in_structural, left_on="neuron_id", right_on="post_neuron_id", how="left")
-    res = res.join(out_weighted, left_on="neuron_id", right_on="pre_neuron_id", how="left")
-    res = res.join(in_weighted, left_on="neuron_id", right_on="post_neuron_id", how="left")
+    res = res.join(out_synapses, left_on="neuron_id", right_on="pre_neuron_id", how="left")
+    res = res.join(in_synapses, left_on="neuron_id", right_on="post_neuron_id", how="left")
     
     res = res.fill_null(0)
     
     res = res.with_columns(
         (pl.col("structural_in_degree") + pl.col("structural_out_degree")).alias("structural_total_degree"),
-        (pl.col("weighted_in_degree") + pl.col("weighted_out_degree")).alias("weighted_total_degree")
+        (pl.col("incoming_synapse_count") + pl.col("outgoing_synapse_count")).alias("total_synapse_count")
     )
     return res
 
@@ -66,14 +66,14 @@ def run_analysis(output_dir: Path):
     neurons, connections = load_canonical_data()
     degree_df = compute_degrees(neurons, connections)
     
-    metrics_cols = ["structural_in_degree", "structural_out_degree", "structural_total_degree", "weighted_in_degree", "weighted_out_degree", "weighted_total_degree"]
+    metrics_cols = ["structural_in_degree", "structural_out_degree", "structural_total_degree", "incoming_synapse_count", "outgoing_synapse_count", "total_synapse_count"]
     metrics = {"distribution_stats": {}, "high_degree_nodes": {}}
     
     figures_dir = output_dir / "figures"
     figures_dir.mkdir(parents=True, exist_ok=True)
     
     report_md = "# Degree and Synapse Distributions Report\n\n"
-    report_md += "**Note on Terminology**: 'Weighted degree' refers strictly to the physical tally (sum) of `synapse_count` across structural connections. This is NOT a physiological weight, conductance, or dynamic model parameter. Biological interpretation is strictly prohibited in C2.\n\n"
+    report_md += "**Note on Terminology**: `incoming_synapse_count` and `outgoing_synapse_count` strictly denote the physical tally (sum) of `synapse_count`. There is absolutely NO implication that these values represent synaptic weight, conductance, current, efficacy, or physiological strength.\n\n"
     
     for col in metrics_cols:
         series = degree_df[col]
