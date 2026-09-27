@@ -16,6 +16,6 @@ Can an exact v783 identity be established?
 **UNCERTAIN / PENDING.** The ID `720575940620900446` is completely absent from the official FlyWire v783 completeness logs provided by Shiu et al., and absent from our Canonical `neurons.parquet`. This indicates it underwent proofreading (e.g., a split or a merge into a larger agglomeration). To recover its precise v783 ID(s) would require programmatic access to the FlyWire CAVE API lineage service, which is beyond the scope of a direct offline dataset transfer.
 
 ## 4. Scientific Significance
-Because this neuron is highly active (557 synapses), dropping it is **NOT** statistically insignificant. It represents roughly ~7.5% of the total stimulus injected into the network during the reference protocol. 
+Because this neuron is highly active (557 synapses), dropping it is **NOT** statistically insignificant. It represents exactly 7.5% (557 / 7,430) of the total outgoing synapses across all 21 reference sugar neurons. 
 
 Therefore, any benchmark executed on the remaining 20 neurons must be strictly designated as a **Version-Transferred Variant** rather than an exact reproduction of the published numerical outputs. The difference in total injected current may materially alter the downstream firing rates (e.g., MN9).

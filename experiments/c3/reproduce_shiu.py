@@ -51,6 +51,7 @@ def run_baseline(sg):
     t_run = time.time() - t0
     
     total_spikes = len(sim.recorder.spikes)
+    active_neurons = len(set(nid for step, nid in sim.recorder.spikes))
     print(f"Baseline total spikes: {total_spikes}")
     print(f"Baseline runtime: {t_run:.2f} s")
     
@@ -64,28 +65,17 @@ def run_baseline(sg):
             "runtime_s": t_run
         }, f, indent=2)
 
-def generate_poisson_spikes(dense_indices, rate_hz, duration_ms, dt_ms, seed=42):
-    np.random.seed(seed)
-    steps = int(duration_ms / dt_ms)
-    prob_per_step = (rate_hz / 1000.0) * dt_ms
-    
-    spikes_by_step = {}
-    for step in range(steps):
-        mask = np.random.rand(len(dense_indices)) < prob_per_step
-        active = np.array(dense_indices)[mask]
-        if len(active) > 0:
-            spikes_by_step[step] = active
-            
-    return spikes_by_step
-
-def run_custom_model(sg, sugar_dense, mn9_dense):
+def run_custom_model(sg, sugar_dense, mn9_dense, input_spikes_list):
     print("=== RUNNING CUSTOM MODEL (100 Hz SUGAR) ===")
     net = build_network_from_graph(sg)
     
-    if len(sugar_dense) == 0:
-        spikes_by_step = {}
-    else:
-        spikes_by_step = generate_poisson_spikes(sugar_dense, 100.0, 1000.0, 0.1, seed=42)
+    spikes_by_step = {}
+    for t_ms, idx in input_spikes_list:
+        step = int(round(t_ms / 0.1))
+        if step not in spikes_by_step:
+            spikes_by_step[step] = []
+        spikes_by_step[step].append(idx)
+        
     sim = Simulation(net)
     
     jump_v = 0.275 * 250.0
@@ -105,14 +95,15 @@ def run_custom_model(sg, sugar_dense, mn9_dense):
     if mn9_dense is not None:
         mn9_spikes = len([1 for step, nid in sim.recorder.spikes if nid == mn9_dense])
     total_spikes = len(sim.recorder.spikes)
+    active_neurons = len(set(nid for step, nid in sim.recorder.spikes))
     
     print(f"Custom Model Runtime: {t_run:.2f} s")
     print(f"Custom Model Total Spikes: {total_spikes}")
     print(f"Custom Model MN9 Firing Rate: {mn9_spikes} Hz")
     
-    return mn9_spikes, total_spikes, t_run
+    return mn9_spikes, total_spikes, active_neurons, t_run
 
-def run_brian2_reference(sg, sugar_dense, mn9_dense):
+def run_brian2_reference(sg, sugar_dense, mn9_dense, input_spikes_list):
     print("=== RUNNING BRIAN2 REFERENCE (100 Hz SUGAR) ===")
     prefs.codegen.target = "numpy"
     defaultclock.dt = 0.1 * ms
@@ -149,13 +140,16 @@ def run_brian2_reference(sg, sugar_dense, mn9_dense):
     syn.connect(i=sources, j=targets)
     syn.w = w_array * mV
     
-    print("Setting up Poisson Inputs...")
-    pois = []
-    seed(42)
+    print("Setting up SpikeGeneratorGroup Inputs...")
+    indices = [idx for t, idx in input_spikes_list]
+    times = [t for t, idx in input_spikes_list] * ms
+    
+    sg_input = SpikeGeneratorGroup(num_nodes, indices, times)
+    sg_syn = Synapses(sg_input, neu, on_pre='v += 0.275*250*mV')
+    sg_syn.connect(j='i')
+    
     for i in sugar_dense:
-        p = PoissonInput(target=neu[i], target_var='v', N=1, rate=100*Hz, weight=0.275*250*mV)
         neu.rfc[i] = 0 * ms
-        pois.append(p)
         
     spk_mon = SpikeMonitor(neu)
     
@@ -168,12 +162,13 @@ def run_brian2_reference(sg, sugar_dense, mn9_dense):
     if mn9_dense is not None:
         mn9_spikes = list(spk_mon.i).count(mn9_dense)
     total_spikes = spk_mon.num_spikes
+    active_neurons = len(set(spk_mon.i))
     
     print(f"Brian2 Runtime: {t_run:.2f} s")
     print(f"Brian2 Total Spikes: {total_spikes}")
     print(f"Brian2 MN9 Firing Rate: {mn9_spikes} Hz")
     
-    return mn9_spikes, total_spikes, t_run
+    return mn9_spikes, total_spikes, active_neurons, t_run
 
 def main():
     print("Loading Graph...")
@@ -185,29 +180,33 @@ def main():
     print(f"Sugar neurons mapped: {len(sugar_dense)}")
     print(f"MN9 dense ID: {mn9_dense}")
     
+    with open("experiments/c3/results/input_spikes.json", "r") as f:
+        input_spikes_list = json.load(f)
+        
     run_baseline(sg)
     
-    int(c_mn9), int(float(c_t)otal), float(c_t) = run_custom_model(sg, sugar_dense, mn9_dense)
-    int(b_mn9), int(float(b_t)otal), float(b_t) = run_brian2_reference(sg, sugar_dense, mn9_dense)
+    c_mn9, c_total, c_act, c_t = run_custom_model(sg, sugar_dense, mn9_dense, input_spikes_list)
+    b_mn9, b_total, b_act, b_t = run_brian2_reference(sg, sugar_dense, mn9_dense, input_spikes_list)
     
-    out_dir = Path("experiments/c3/results")
+    out_dir = Path("reports/c3/benchmarks")
+    out_dir.mkdir(parents=True, exist_ok=True)
     
-    with open(out_dir / "shiu_sugar100_results.json", "w") as f:
+    with open(out_dir / "parity_v783.json", "w") as f:
         json.dump({
             "experiment": "sugarR_100Hz",
             "duration_ms": 1000,
             "custom": {
                 "mn9_rate": int(c_mn9),
-                "total_spikes": int(float(c_t)otal),
+                "total_spikes": int(c_total),
                 "runtime_s": float(c_t)
             },
             "brian2_reference": {
                 "mn9_rate": int(b_mn9),
-                "total_spikes": int(float(b_t)otal),
+                "total_spikes": int(b_total),
                 "runtime_s": float(b_t)
             },
-            "diff_mn9_rate": abs(c_mn9 - b_mn9),
-            "diff_total_spikes": abs(float(c_t)otal - float(b_t)otal)
+            "diff_mn9_rate": int(abs(c_mn9 - b_mn9)),
+            "diff_total_spikes": int(abs(c_total - b_total))
         }, f, indent=2)
         
 if __name__ == "__main__":

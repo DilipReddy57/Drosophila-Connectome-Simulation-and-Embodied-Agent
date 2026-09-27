@@ -1,0 +1,8 @@
+Loading Graph...
+Graph loaded. N=139255, E=5342446
+Sugar neurons mapped: 0
+MN9 dense ID: None
+=== RUNNING BASELINE (NO STIMULUS) ===
+Baseline total spikes: 0
+Baseline runtime: 82.63 s
+=== RUNNING CUSTOM MODEL (100 Hz SUGAR) ===

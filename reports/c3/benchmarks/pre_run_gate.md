@@ -31,7 +31,7 @@ An explicit path trace proved that the intervening neurotransmitters preserve th
 
 The biological connectivity correctly points toward the motor circuit.
 
-## 6. Small Network Gate
+## 6. Small Network Gate (ENGINEERING SANITY CHECK, NOT BIOLOGICAL VALIDATION)
 A subgraph simulation (27,489 neurons restricted to 3 hops) executed the 10,000-step LIF integration. 
 - Total network spikes: 2,552
 - MN9 Spikes: 0
