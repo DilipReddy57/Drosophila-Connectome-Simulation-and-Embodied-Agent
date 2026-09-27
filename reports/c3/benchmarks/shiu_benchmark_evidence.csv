@@ -1,0 +1,14 @@
+parameter,our_value,unit,source,source_location,evidence_type,confidence,implementation_location
+V_rest,-52,mV,Shiu et al.,model.py L15,REFERENCE_CODE,HIGH,drosophila_connectome/neural/lif/parameters.py
+V_reset,-52,mV,Shiu et al.,model.py L16,REFERENCE_CODE,HIGH,drosophila_connectome/neural/lif/parameters.py
+V_th,-45,mV,Shiu et al.,model.py L17,REFERENCE_CODE,HIGH,drosophila_connectome/neural/lif/parameters.py
+tau_m,20,ms,Shiu et al.,model.py L18,REFERENCE_CODE,HIGH,drosophila_connectome/neural/lif/parameters.py
+tau_syn,5,ms,Shiu et al.,model.py L21,REFERENCE_CODE,HIGH,drosophila_connectome/neural/lif/parameters.py
+t_ref,2.2,ms,Shiu et al.,model.py L24,REFERENCE_CODE,HIGH,drosophila_connectome/neural/lif/parameters.py
+t_dly,1.8,ms,Shiu et al.,model.py L27,REFERENCE_CODE,HIGH,drosophila_connectome/neural/lif/parameters.py
+W_syn,0.275,mV,Shiu et al.,model.py L30,REFERENCE_CODE,HIGH,drosophila_connectome/neural/builder.py
+r_poi,100,Hz,Shiu et al.,example.ipynb L133,REFERENCE_CODE,HIGH,experiments/c3/reproduce_shiu.py
+f_poi,250,scalar,Shiu et al.,model.py L34,REFERENCE_CODE,HIGH,experiments/c3/reproduce_shiu.py
+t_run,1000,ms,Shiu et al.,model.py L11,REFERENCE_CODE,HIGH,experiments/c3/reproduce_shiu.py
+dt,0.1,ms,Shiu et al.,brian2 default,ASSUMPTION,MEDIUM,drosophila_connectome/neural/lif/parameters.py
+MN9_ID,720575940660219265,id,Shiu et al.,example.ipynb L176,REFERENCE_CODE,HIGH,experiments/c3/reproduce_shiu.py
