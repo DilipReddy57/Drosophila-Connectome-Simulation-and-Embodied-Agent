@@ -31,15 +31,15 @@ def get_sugar_neurons(sg):
     ]
     dense_indices = []
     for nid in sugar_ids:
-        if nid in mapping:
-            dense_indices.append(mapping[nid])
+        if str(nid) in mapping:
+            dense_indices.append(mapping[str(nid)])
     return dense_indices
 
 def get_mn9_dense(sg):
     df_map = pd.read_parquet('data/derived/final_v1/dense_id_mapping.parquet')
     mapping = dict(zip(df_map['root_id'], df_map['dense_index']))
     mn9_id = 720575940660219265
-    return mapping.get(mn9_id, None)
+    return mapping.get(str(mn9_id), None)
 
 def run_baseline(sg):
     print("=== RUNNING BASELINE (NO STIMULUS) ===")
