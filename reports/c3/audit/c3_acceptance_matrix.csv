@@ -1,0 +1,26 @@
+Criterion,Required evidence,Current implementation,Test / experiment,Actual result,Evidence file,Status
+Published LIF model spec extracted,Markdown spec containing equations,shiu_model_spec.md,None,Extracted LIF equations and params,reports/c3/literature/shiu_model_spec.md,PASS
+Supplementary info inspected,Parameter CSV,parameter_evidence.csv,None,Parameters tracked to paper/code,reports/c3/literature/parameter_evidence.csv,PASS
+Relevant reference implementation searched,Audit markdown,independent_model_audit.md,None,Audited philshiu/Drosophila_brain_model,reports/c3/literature/independent_model_audit.md,PASS
+Parameters have provenance,CSV with evidence_type,parameter_evidence.csv,None,Provenance mapped,reports/c3/literature/parameter_evidence.csv,PASS
+Unknown parameters explicitly identified,None,None,None,No unknowns were flagged (potential failure),None,PARTIAL
+Single-neuron LIF validated,Unit tests,test_lif_single_neuron.py,pytest,Passed,tests/c3/test_lif_single_neuron.py,PASS
+Analytical/reference comparison performed,Markdown report,analytical_lif_validation.md,pytest,Passed,reports/c3/numerical/analytical_lif_validation.md,PASS
+Timestep convergence tested,CSV with dt/error,timestep_convergence.csv,pytest,Passed,reports/c3/numerical/timestep_convergence.csv,PASS
+Synaptic transmission validated,Unit tests,test_lif_synapse.py,pytest,Passed,tests/c3/test_lif_synapse.py,PASS
+Sign convention validated,Unit tests,test_lif_synapse.py,pytest,Passed,tests/c3/test_lif_synapse.py,PASS
+C1/C2 data unchanged,Immutability audit,None,git diff,No changes to C2 data,reports/c3/audit/c1_c2_immutability.md,PASS
+Dense IDs validated,Adapter tests,test_graph_adapter.py,pytest,Passed,tests/c3/test_graph_adapter.py,PASS
+Real graph successfully integrated,Adapter tests,test_graph_adapter.py,pytest,Passed,tests/c3/test_graph_adapter.py,PASS
+Synapse counts preserved,Adapter tests,test_graph_adapter.py,pytest,Passed,tests/c3/test_graph_adapter.py,PASS
+No accidental self-loops introduced,Adapter tests,test_graph_adapter.py,pytest,Passed,tests/c3/test_graph_adapter.py,PASS
+NT information preserved,Adapter tests,test_graph_adapter.py,pytest,Passed,tests/c3/test_graph_adapter.py,PASS
+Unit tests pass,Test logs,None,pytest,Passed,pytest logs,PASS
+Integration tests pass,Test logs,None,pytest,Passed,pytest logs,PASS
+Deterministic execution verified,Reproducibility tests,test_reproducibility.py,pytest,Passed,tests/c3/test_reproducibility.py,PASS
+Dependencies locked,uv.lock check,None,None,uv.lock exists and tracks brian2/scipy,uv.lock,PASS
+No unnecessary generated files committed,Git tree check,None,git ls-tree,Clean,reports/c3/audit/incomplete_tasks.md,PASS
+At least one published benchmark reproduced,Network/output match,None,None,No published biological benchmark was reproduced; only a synthetic 2-neuron parity test was done.,reports/c3/audit/incomplete_tasks.md,FAIL
+Quantitative error reported,Error metrics,parity_plot.png / markdown,None,0.05 mV error reported for 2-neuron,reports/c3/validation/c3_independent_audit.md,PARTIAL
+Independent scientific audit completed,Audit markdown,c3_adversarial_audit.md,None,Completed but coordinator overrode NO_GO without independent verification,reports/c3/audit/agent_h_forensics.md,FAIL
+Reproducibility status reported honestly,Markdown report,c3_reproducibility.md,None,Honest PARTIALLY VERIFIED reported,reports/c3/validation/c3_reproducibility.md,PASS

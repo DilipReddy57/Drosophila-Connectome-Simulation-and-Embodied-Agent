@@ -1,0 +1,69 @@
+File,Term,Line_Content
+network.py:51,weight,"update_synapses(self.network.state, delayed_spikes, self.network.weight_matrix, self.network.params)"
+network.py:32,delay,if self.params.delay_steps > 0:
+equations.py:7,refractory,I_contribution = state.I_syn[not_refractory] * (1.0 - params.decay_m)
+equations.py:26,delay,"def update_synapses(state, delayed_spikes, weight_matrix, params):"
+parameters.py:11,delay,"delay=1.8,"
+equations.py:17,refractory,state.refractory_time[spikes] = params.refractory_steps
+equations.py:4,refractory,not_refractory = state.refractory_time == 0
+equations.py:30,weight,state.I_syn += weight_matrix.dot(delayed_spikes)
+builder.py:45,weight,"(weights, (graph.dense_post, graph.dense_pre)),"
+network.py:27,reset,self.state.reset(self.params.V_rest)
+builder.py:37,weight,# Calculate final weights
+equations.py:16,reset,state.V[spikes] = params.V_reset
+network.py:24,weight,self.weight_matrix = weight_matrix
+network.py:51,delay,"update_synapses(self.network.state, delayed_spikes, self.network.weight_matrix, self.network.params)"
+parameters.py:6,reset,"V_reset=-52.0,"
+builder.py:49,weight,"return Network(graph.num_nodes, weight_matrix, params)"
+network.py:22,weight,"def __init__(self, num_neurons, weight_matrix, params=None):"
+builder.py:28,Glut,polarity[graph.nt_type == 'GLUT'] = -1.0
+equations.py:12,refractory,state.V[not_refractory] = params.V_rest + delta_V + I_contribution
+synapse.py:5,weight,self.weight = weight
+parameters.py:20,delay,self.delay = delay
+equations.py:22,reset,state.V[state.refractory_time > 0] = params.V_reset
+parameters.py:13,0.275,W_syn=0.275):
+network.py:33,delay,"self.spike_buffer = np.zeros((self.params.delay_steps + 1, num_neurons), dtype=bool)"
+builder.py:26,ACh,polarity[graph.nt_type == 'ACH'] = 1.0
+builder.py:16,0.275,W_syn is the global synaptic weight scaling factor (default 0.275 mV).
+equations.py:19,refractory,in_refractory = state.refractory_time > 0
+network.py:30,delay,# Delay steps is how many steps we wait. So a buffer of size delay_steps + 1
+network.py:46,delay,"delayed_spikes = np.zeros(self.network.num_neurons, dtype=bool)"
+builder.py:24,ACh,"# Shiu et al. mapping: ACh -> +1. GABA, Glutamate, Histamine -> -1"
+parameters.py:17,tau,self.tau_m = tau_m
+parameters.py:18,tau,self.tau_syn = tau_syn
+network.py:31,delay,# is enough to store spikes and retrieve them after delay.
+state.py:13,refractory,self.refractory_time.fill(0)
+parameters.py:27,delay,self.delay_steps = int(np.round(self.delay / self.dt))
+network.py:29,delay,# Buffer for delayed spikes. Rows represent delay steps.
+network.py:48,delay,read_idx = self.network.step_idx % (self.network.params.delay_steps + 1)
+equations.py:29,delay,if delayed_spikes.any():
+equations.py:30,delay,state.I_syn += weight_matrix.dot(delayed_spikes)
+network.py:45,delay,# 1. Update synapses using delayed spikes
+parameters.py:9,tau,"tau_syn=5.0,"
+builder.py:24,Glut,"# Shiu et al. mapping: ACh -> +1. GABA, Glutamate, Histamine -> -1"
+state.py:8,refractory,"self.refractory_time = np.zeros(num_neurons, dtype=int)"
+builder.py:27,GABA,polarity[graph.nt_type == 'GABA'] = -1.0
+builder.py:17,GABA,"S_j is the neurotransmitter polarity sign (+1 for ACh, -1 for GABA/Glut/Hist)."
+builder.py:16,weight,W_syn is the global synaptic weight scaling factor (default 0.275 mV).
+parameters.py:15,reset,self.V_reset = V_reset
+parameters.py:25,tau,self.decay_syn = np.exp(-self.dt / self.tau_syn)
+equations.py:20,refractory,state.refractory_time[in_refractory] -= 1
+equations.py:22,refractory,state.V[state.refractory_time > 0] = params.V_reset
+parameters.py:24,tau,self.decay_m = np.exp(-self.dt / self.tau_m)
+builder.py:43,weight,"# We want weight_matrix[post, pre] = weight for easy vector matrix multiplication (W @ Spikes)"
+builder.py:23,sign,# Map neurotransmitters to polarity signs (S_j)
+synapse.py:2,weight,"def __init__(self, pre_id, post_id, weight):"
+parameters.py:26,refractory,self.refractory_steps = int(np.round(self.t_ref / self.dt))
+builder.py:39,weight,weights = graph.synapse_count.astype(np.float32) * polarity * params.W_syn
+network.py:49,delay,delayed_spikes = self.network.spike_buffer[read_idx]
+equations.py:6,refractory,delta_V = (state.V[not_refractory] - params.V_rest) * params.decay_m
+state.py:10,reset,"def reset(self, V_rest):"
+equations.py:26,weight,"def update_synapses(state, delayed_spikes, weight_matrix, params):"
+equations.py:10,refractory,I_contribution += external_I[not_refractory] * (1.0 - params.decay_m)
+builder.py:24,GABA,"# Shiu et al. mapping: ACh -> +1. GABA, Glutamate, Histamine -> -1"
+parameters.py:8,tau,"tau_m=20.0,"
+network.py:58,delay,write_idx = (self.network.step_idx + self.network.params.delay_steps) % (self.network.params.delay_steps + 1)
+builder.py:17,ACh,"S_j is the neurotransmitter polarity sign (+1 for ACh, -1 for GABA/Glut/Hist)."
+builder.py:17,sign,"S_j is the neurotransmitter polarity sign (+1 for ACh, -1 for GABA/Glut/Hist)."
+builder.py:17,Glut,"S_j is the neurotransmitter polarity sign (+1 for ACh, -1 for GABA/Glut/Hist)."
+builder.py:44,weight,weight_matrix = sp.csr_matrix(
