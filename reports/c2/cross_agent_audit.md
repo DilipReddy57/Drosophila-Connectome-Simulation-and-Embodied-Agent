@@ -1,0 +1,27 @@
+# C2 Cross-Agent Adversarial Audit Report (Post-Fix)
+
+**Auditor:** Agent H (Adversarial Auditor)
+
+## 1. Reproducibility Claims
+- **Finding:** Reproducibility claims fail to explicitly state PARTIALLY VERIFIED.
+- **Cause:** While hashes were verified, the required classification (PARTIALLY VERIFIED) for not using a fresh independent environment was omitted from the final report.
+- **Severity:** MAJOR
+
+## 2. Scope Boundaries (Weights)
+- **Finding:** The metric registry and final report still contain the strings `weighted_in_degree` and `weighted_out_degree`.
+- **Cause:** Although caveats were added to disclaim any functional physiological modeling, the literal use of the word "weight/weighted" is a minor violation of the strict "NO weights" boundary.
+- **Severity:** MINOR
+
+## 3. Self-Edge Evidence
+- **Finding:** The previously reported 56,231 autapses were confirmed to be 0.
+- **Cause:** Properly identified and documented as a CONFIRMED_PLANNING_OR_TRANSCRIPTION_ERROR, backed by invariant tests in `test_real_data.py`.
+- **Severity:** OBSERVATION
+
+## 4. Cell-Type Terminology
+- **Finding:** The analysis correctly separates taxonomic levels.
+- **Cause:** `any_taxonomic`, `super_class`, `cell_type`, `class`, `subclass`, and `hemilineage` are distinctly analyzed without overlapping logic.
+- **Severity:** OBSERVATION
+
+---
+## Conclusion: CONDITIONAL_GO
+The fixes addressed the critical functional simulation overlaps and schema mismatches. However, the reproducibility claim must explicitly include the PARTIALLY VERIFIED classification, and the use of the word "weighted" should ideally be replaced with "synapse_tally" to avoid any residual ambiguity.

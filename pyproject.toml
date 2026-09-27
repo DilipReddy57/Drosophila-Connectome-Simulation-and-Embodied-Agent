@@ -15,8 +15,12 @@ classifiers = [
   "Programming Language :: Python :: 3 :: Only",
 ]
 dependencies = [
+    "igraph>=1.0.0",
+    "matplotlib>=3.10.9",
+    "pandas>=2.3.3",
     "polars>=1.44.2",
     "pyarrow>=25.0.1",
+    "scipy>=1.15.3",
 ]
 
 [tool.hatch.build.targets.wheel]
