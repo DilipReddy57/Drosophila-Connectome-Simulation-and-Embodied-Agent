@@ -15,7 +15,7 @@ Metrics were extracted cleanly from the canonical data (`neurons.parquet`, `conn
 The graph explicitly matches 139,255 canonical neurons, 5,342,446 connection rows, and 50,666,648 synapses. The locked FAFB v783 raw and canonical datasets contain zero direct self-loop rows under the tested neuron-ID definitions. The provenance of the previously reported 56,231 value is CONFIRMED_PLANNING_OR_TRANSCRIPTION_ERROR.
 
 ## 5. Degree Distributions (Agent B)
-In/out structural degrees and synapse-tally distributions computed. The degree counts explicitly distinguish between `structural` and `synapse_count` (e.g. `incoming_synapse_count`). No ambiguous "weighted" terms exist, completely preventing functional weight/LIF interpretations.
+Calculated `structural_in_degree`, `structural_out_degree`, `structural_total_degree`, `incoming_synapse_count`, `outgoing_synapse_count`, and `total_synapse_count`. All physiological terminology (e.g. 'weighted degree', 'conductance') has been purged.
 
 ## 6. Graph Topology (Agent C)
 Calculated sparsity, reciprocity, and connected components. Verified structural edges match topology edges.
@@ -24,22 +24,22 @@ Calculated sparsity, reciprocity, and connected components. Verified structural 
 Derived region-level connection row and synapse distributions. No pre-region to post-region matrix was falsely manufactured.
 
 ## 8. Neurotransmitters (Agent E)
-Annotated NT counts gathered correctly. NT conflict resolution during canonical aggregation (.first()) is documented for future datasets. No excitation/inhibition inferences were made. NT aggregation robustness is verified with maximum distinct NTs per group <= 1.
+Annotated NT counts gathered correctly. NT conflict resolution during canonical aggregation (.first()) is documented for future datasets (0 conflicts). No excitation/inhibition inferences were made.
 
 ## 9. Cell Types (Agent F)
-Proper granular coverage was computed independently for `super_class`, `class`, `subclass`, `hemilineage`, and `cell_type` without false null equivalency.
+Explicit coverage extracted for taxonomic levels (`super_class`, `class`, `subclass`, `hemilineage`, `cell_type`) without false aggregation.
 
 ## 10. Literature Benchmarks (Agent G)
-Evidence documented across corresponding structural filters for FAFB v783 (Shiu et al. 2024, Dorkenwald et al. 2024). Explanations for data differences (e.g., 54.5M vs 50.6M) were strictly removed unless verified by corresponding thresholds.
+Evidence documented across corresponding structural filters for FAFB v783. The discrepancy in synapse counts (~54.5M published vs 50.6M canonical) is strictly classified as UNRESOLVED pending exact thresholding code evidence.
 
 ## 11. Reproducibility & Provenance
-Reproducibility is PARTIALLY VERIFIED. C1 input hashes and same-environment execution are verified; true fresh-environment testing was not performed.
+Reproducibility status is PARTIALLY VERIFIED. Hashes matched in the current environment, but independent cross-machine verification was not performed.
 
 ## 12. Audit Findings (Agent H)
-The post-fix audit verifies that 0 CRITICAL and 0 MAJOR issues remain. Provenance errors (56,231 self edges), modeling definitions (LIF/weighted), and coverage terminology have been strictly resolved.
+The final 'GO' audit documented in `cross_agent_audit.md` and `cross_agent_audit.json` was conducted and asserted by the C2 coordinator. It does NOT represent a genuinely independent execution pass by a distinct Subagent H on the post-fix tree.
 
 ## 13. Limitations & Out-of-Scope Items
-No dynamic parameters (delays, conductances, LIFs) were established. The structural measurements are strictly graph-theoretic and physical annotation derivations.
+No dynamic parameters (delays, conductances, LIFs) were established. The measurements are strictly graph-theoretic and physical annotation derivations.
 
 ## 14. C3 Readiness
-The canonical representation passed the defined structural, accounting, reproducibility, and reference-comparison checks. Awaiting human review before proceeding to Phase C3.
+The canonical representation passed the structural graph validation checks. Awaiting human review before proceeding to Phase C3.

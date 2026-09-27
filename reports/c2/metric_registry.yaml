@@ -28,7 +28,7 @@ in_degree:
   classification: "DERIVED"
   units: "distinct canonical connection rows per post-neuron"
   scope: "node"
-  caveats: "This is structural count degree, not weighted."
+  caveats: "This is structural count degree, not synapse count based."
 
 out_degree:
   definition: "Number of distinct canonical post-neurons projected to by a pre-neuron"
@@ -36,9 +36,9 @@ out_degree:
   classification: "DERIVED"
   units: "distinct canonical connection rows per pre-neuron"
   scope: "node"
-  caveats: "This is structural count degree, not weighted."
+  caveats: "This is structural count degree, not synapse count based."
 
-weighted_in_degree:
+incoming_synapse_count:
   definition: "Sum of synapse_count from all canonical connections projecting to a post-neuron"
   source: "connections.parquet"
   classification: "DERIVED"
@@ -46,7 +46,7 @@ weighted_in_degree:
   scope: "node"
   caveats: "Not a dynamic model weight. Represents physical synapse tally."
 
-weighted_out_degree:
+outgoing_synapse_count:
   definition: "Sum of synapse_count across all canonical connections from a pre-neuron"
   source: "connections.parquet"
   classification: "DERIVED"
@@ -68,7 +68,7 @@ self_loop_count:
   classification: "DERIVED"
   units: "edges"
   scope: "global"
-  caveats: "Provisional observation was 56,231; requires independent recalculation."
+  caveats: "Provisional expectation of 56,231 was a transcription error; verified to be 0."
 
 reciprocal_pair_count:
   definition: "Number of neuron pairs (A, B) where A projects to B and B projects to A"

@@ -4,7 +4,6 @@ from pathlib import Path
 def generate_final_report():
     reports_dir = Path("reports/c2")
     
-    # Load all agent json outputs
     jsons = {}
     for f in reports_dir.glob("*.json"):
         if f.name == "c2_final_result.json" or f.name == "cross_agent_audit.json": continue
@@ -14,7 +13,6 @@ def generate_final_report():
     with open(reports_dir / "cross_agent_audit.json", "r") as fp:
         audit_json = json.load(fp)
 
-    # Final Payload
     final_result = {
         "objective": "Phase C2 Graph Analytics & Biological Sanity Validation",
         "dataset_identity": "FAFB v783",
@@ -28,7 +26,6 @@ def generate_final_report():
     with open(reports_dir / "c2_final_result.json", "w") as fp:
         json.dump(final_result, fp, indent=2)
 
-    # Final Markdown
     md = [
         "# Phase C2 Final Report: Graph Analytics & Biological Sanity Validation",
         "",
@@ -47,7 +44,7 @@ def generate_final_report():
         "The graph explicitly matches 139,255 canonical neurons, 5,342,446 connection rows, and 50,666,648 synapses. The locked FAFB v783 raw and canonical datasets contain zero direct self-loop rows under the tested neuron-ID definitions. The provenance of the previously reported 56,231 value is CONFIRMED_PLANNING_OR_TRANSCRIPTION_ERROR.",
         "",
         "## 5. Degree Distributions (Agent B)",
-        "In/out structural degrees and synapse-tally distributions computed. The 'weighted degree' term used strictly reflects a physical synapse tally, not a functional physiological weight.",
+        "Calculated `structural_in_degree`, `structural_out_degree`, `structural_total_degree`, `incoming_synapse_count`, `outgoing_synapse_count`, and `total_synapse_count`. All physiological terminology (e.g. 'weighted degree', 'conductance') has been purged.",
         "",
         "## 6. Graph Topology (Agent C)",
         "Calculated sparsity, reciprocity, and connected components. Verified structural edges match topology edges.",
@@ -56,25 +53,25 @@ def generate_final_report():
         "Derived region-level connection row and synapse distributions. No pre-region to post-region matrix was falsely manufactured.",
         "",
         "## 8. Neurotransmitters (Agent E)",
-        "Annotated NT counts gathered correctly. NT conflict resolution during canonical aggregation (.first()) is documented for future datasets. No excitation/inhibition inferences were made.",
+        "Annotated NT counts gathered correctly. NT conflict resolution during canonical aggregation (.first()) is documented for future datasets (0 conflicts). No excitation/inhibition inferences were made.",
         "",
         "## 9. Cell Types (Agent F)",
-        "Proper missing-annotation coverage achieved parsing cell type annotations without physiological assignment.",
+        "Explicit coverage extracted for taxonomic levels (`super_class`, `class`, `subclass`, `hemilineage`, `cell_type`) without false aggregation.",
         "",
         "## 10. Literature Benchmarks (Agent G)",
-        "Evidence documented across corresponding structural filters for FAFB v783 (Shiu et al. 2024, Dorkenwald et al. 2024).",
+        "Evidence documented across corresponding structural filters for FAFB v783. The discrepancy in synapse counts (~54.5M published vs 50.6M canonical) is strictly classified as UNRESOLVED pending exact thresholding code evidence.",
         "",
         "## 11. Reproducibility & Provenance",
-        "All hashes rigorously matched. Scripts load from exact pinned inputs.",
+        "Reproducibility status is PARTIALLY VERIFIED. Hashes matched in the current environment, but independent cross-machine verification was not performed.",
         "",
         "## 12. Audit Findings (Agent H)",
-        "Adversarial audit highlighted missing schemas, null checks, and scope violations. These issues (such as fixing schema column errors in `neurotransmitters.py` and `regions.py`, handling string 'Unknown's in `cell_types.py`, and refactoring functional modeling text in `literature_benchmark.md`) were subsequently fixed by the coordinator.",
+        "The final 'GO' audit documented in `cross_agent_audit.md` and `cross_agent_audit.json` was conducted and asserted by the C2 coordinator. It does NOT represent a genuinely independent execution pass by a distinct Subagent H on the post-fix tree.",
         "",
         "## 13. Limitations & Out-of-Scope Items",
-        "No dynamic parameters (delays, conductances, LIFs) were established. The structural measurements are strictly graph-theoretic and physical annotation derivations.",
+        "No dynamic parameters (delays, conductances, LIFs) were established. The measurements are strictly graph-theoretic and physical annotation derivations.",
         "",
         "## 14. C3 Readiness",
-        "The canonical representation passed the defined structural, accounting, reproducibility, and reference-comparison checks. Awaiting human review before proceeding to Phase C3."
+        "The canonical representation passed the structural graph validation checks. Awaiting human review before proceeding to Phase C3."
     ]
     
     with open(reports_dir / "c2_final_report.md", "w") as fp:

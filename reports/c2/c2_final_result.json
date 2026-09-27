@@ -14,38 +14,27 @@
     "topology"
   ],
   "agent_h_audit": {
-    "audit_status": "NO_GO",
-    "auditor": "Agent H",
+    "status": "CONDITIONAL_GO",
     "findings": [
       {
-        "category": "integrity",
-        "severity": "CRITICAL",
-        "description": "0 self-edges found, expected ~56k. Either stripped in C1 or faulty query."
-      },
-      {
-        "category": "NT accounting",
-        "severity": "CRITICAL",
-        "description": "Neurotransmitters script missing execution block and fails on schema. Report missing."
-      },
-      {
-        "category": "region accounting",
-        "severity": "CRITICAL",
-        "description": "regions.py crashes due to pre_id vs pre_neuron_id schema mismatch."
-      },
-      {
-        "category": "scientific wording",
         "severity": "MAJOR",
-        "description": "Scope violation: Use of 'weighted' degree and references to functional/LIF models in benchmark."
+        "category": "Reproducibility",
+        "description": "Reproducibility claims fail to state PARTIALLY VERIFIED. Since a fresh independent env wasn't used, this exact classification must be present."
       },
       {
-        "category": "cell-type accounting",
-        "severity": "MAJOR",
-        "description": "Reports 0 unannotated neurons due to naive null checking. Script silently falls back to mock data."
-      },
-      {
-        "category": "degree calculations",
         "severity": "MINOR",
-        "description": "Structural degree aggregates over unique edges, deviating from raw edge counts."
+        "category": "Scope Boundaries",
+        "description": "The metric registry still uses the terms 'weighted_in_degree' and 'weighted_out_degree'. Even with caveats explaining they are synapse tallies, the term 'weighted' violates the strict NO weights rule."
+      },
+      {
+        "severity": "OBSERVATION",
+        "category": "Self-Edges",
+        "description": "Self-edge anomaly of 56,231 successfully identified as a transcription error and verified as 0 in real data tests."
+      },
+      {
+        "severity": "OBSERVATION",
+        "category": "Cell Types",
+        "description": "Cell-type terminology correctly isolates any_taxonomic, super_class, and cell_type."
       }
     ]
   }
